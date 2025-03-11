@@ -11,6 +11,10 @@
 		481E7A002D7789E1006EB49E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481E79FF2D7789E1006EB49E /* ContentView.swift */; };
 		481E7A022D7789E3006EB49E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 481E7A012D7789E3006EB49E /* Assets.xcassets */; };
 		481E7A062D7789E3006EB49E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 481E7A052D7789E3006EB49E /* Preview Assets.xcassets */; };
+		481E7A0F2D7E26F2006EB49E /* DailyHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481E7A0E2D7E26F2006EB49E /* DailyHabitView.swift */; };
+		481E7A122D7E2777006EB49E /* DailyHabits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481E7A112D7E2777006EB49E /* DailyHabits.swift */; };
+		481E7A142D7E290F006EB49E /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481E7A132D7E290F006EB49E /* Habit.swift */; };
+		481E7A162D7E29A9006EB49E /* HabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481E7A152D7E29A9006EB49E /* HabitView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +24,10 @@
 		481E7A012D7789E3006EB49E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		481E7A032D7789E3006EB49E /* HabitTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HabitTracker.entitlements; sourceTree = "<group>"; };
 		481E7A052D7789E3006EB49E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		481E7A0E2D7E26F2006EB49E /* DailyHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHabitView.swift; sourceTree = "<group>"; };
+		481E7A112D7E2777006EB49E /* DailyHabits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHabits.swift; sourceTree = "<group>"; };
+		481E7A132D7E290F006EB49E /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
+		481E7A152D7E29A9006EB49E /* HabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,11 +60,14 @@
 		481E79FC2D7789E1006EB49E /* HabitTracker */ = {
 			isa = PBXGroup;
 			children = (
+				481E7A102D7E2744006EB49E /* Models */,
 				481E79FD2D7789E1006EB49E /* HabitTrackerApp.swift */,
 				481E79FF2D7789E1006EB49E /* ContentView.swift */,
 				481E7A012D7789E3006EB49E /* Assets.xcassets */,
 				481E7A032D7789E3006EB49E /* HabitTracker.entitlements */,
 				481E7A042D7789E3006EB49E /* Preview Content */,
+				481E7A0E2D7E26F2006EB49E /* DailyHabitView.swift */,
+				481E7A152D7E29A9006EB49E /* HabitView.swift */,
 			);
 			path = HabitTracker;
 			sourceTree = "<group>";
@@ -67,6 +78,15 @@
 				481E7A052D7789E3006EB49E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		481E7A102D7E2744006EB49E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				481E7A112D7E2777006EB49E /* DailyHabits.swift */,
+				481E7A132D7E290F006EB49E /* Habit.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +160,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				481E7A002D7789E1006EB49E /* ContentView.swift in Sources */,
+				481E7A142D7E290F006EB49E /* Habit.swift in Sources */,
+				481E7A0F2D7E26F2006EB49E /* DailyHabitView.swift in Sources */,
+				481E7A162D7E29A9006EB49E /* HabitView.swift in Sources */,
+				481E7A122D7E2777006EB49E /* DailyHabits.swift in Sources */,
 				481E79FE2D7789E1006EB49E /* HabitTrackerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,10 +309,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = sem6.HabitTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -321,10 +347,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = sem6.HabitTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
