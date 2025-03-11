@@ -15,14 +15,14 @@ struct Habit {
     var interval: [WeekDays]
 }
 
-enum WeekDays {
-    case Monday
-    case Tuesday
-    case Wednesday
-    case Thursday
-    case Friday
-    case Saturday
-    case Sunday
+enum WeekDays: String {
+    case Monday = "Monday"
+    case Tuesday = "Tuesday"
+    case Wednesday = "Wednesday"
+    case Thursday = "Thursday"
+    case Friday = "Friday"
+    case Saturday = "Saturday"
+    case Sunday = "Sunday"
 }
 
 extension Habit {
@@ -38,6 +38,9 @@ extension Habit {
                 interval: [WeekDays.Monday, WeekDays.Tuesday, WeekDays.Wednesday, WeekDays.Thursday, WeekDays.Friday, WeekDays.Saturday, WeekDays.Sunday]),
         Habit(  id: UUID(),
                 title: "Water plants",
-                interval: [WeekDays.Monday])
+                interval: [WeekDays.Monday]),
+        Habit(  id: UUID(),
+                title: "new Habit",
+                interval: [WeekDays.Tuesday])
     ]
 }

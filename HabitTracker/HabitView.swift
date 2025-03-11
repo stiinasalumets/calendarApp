@@ -11,8 +11,17 @@ import SwiftUI
 struct HabitView: View {
     let habit: Habit
     var body: some View {
-        Text(habit.title)
-        Spacer()
+        HStack {
+            Text(habit.title)
+            
+            Spacer()
+            
+            Toggle(isOn: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Is On@*/.constant(true)/*@END_MENU_TOKEN@*/) {
+                        
+                    }
+        }.padding()
+        
+        
     }
 }
 
