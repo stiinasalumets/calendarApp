@@ -12,12 +12,12 @@ struct DailyHabits {
     var id: UUID
     var date: Date
     var weekDay: WeekDays
-    var allHabits : [Habit]
-    var habits : [Habit] { filterHabits(habits: allHabits, day: weekDay)}
+    var allHabits : [OldHabit]
+    var habits : [OldHabit] { filterHabits(habits: allHabits, day: weekDay)}
 }
 
-func filterHabits (habits: [Habit], day: WeekDays) -> [Habit] {
-    var returnArray = Array<Habit>()
+func filterHabits (habits: [OldHabit], day: WeekDays) -> [OldHabit] {
+    var returnArray = Array<OldHabit>()
     
     habits.forEach { element in
         if element.interval.contains(WeekDays.Tuesday) {

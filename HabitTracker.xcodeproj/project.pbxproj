@@ -12,9 +12,10 @@
 		481E7A022D7789E3006EB49E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 481E7A012D7789E3006EB49E /* Assets.xcassets */; };
 		481E7A062D7789E3006EB49E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 481E7A052D7789E3006EB49E /* Preview Assets.xcassets */; };
 		481E7A0F2D7E26F2006EB49E /* DailyHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481E7A0E2D7E26F2006EB49E /* DailyHabitView.swift */; };
-		481E7A122D7E2777006EB49E /* DailyHabits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481E7A112D7E2777006EB49E /* DailyHabits.swift */; };
-		481E7A142D7E290F006EB49E /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481E7A132D7E290F006EB49E /* Habit.swift */; };
 		481E7A162D7E29A9006EB49E /* HabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481E7A152D7E29A9006EB49E /* HabitView.swift */; };
+		AE114BE52D804F9D00B1F665 /* CurrentHabits.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE114BE32D804F9D00B1F665 /* CurrentHabits.xcdatamodeld */; };
+		AE114BE72D80627100B1F665 /* habitData.json in Resources */ = {isa = PBXBuildFile; fileRef = AE114BE62D80626000B1F665 /* habitData.json */; };
+		AE114BEF2D80688600B1F665 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE114BEE2D80688600B1F665 /* DataController.swift */; };
 		AEF682D72D804709004ABEF7 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF682D62D804709004ABEF7 /* CalendarView.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,9 +27,10 @@
 		481E7A032D7789E3006EB49E /* HabitTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HabitTracker.entitlements; sourceTree = "<group>"; };
 		481E7A052D7789E3006EB49E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		481E7A0E2D7E26F2006EB49E /* DailyHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHabitView.swift; sourceTree = "<group>"; };
-		481E7A112D7E2777006EB49E /* DailyHabits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHabits.swift; sourceTree = "<group>"; };
-		481E7A132D7E290F006EB49E /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
 		481E7A152D7E29A9006EB49E /* HabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitView.swift; sourceTree = "<group>"; };
+		AE114BE42D804F9D00B1F665 /* CurrentHabits.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CurrentHabits.xcdatamodel; sourceTree = "<group>"; };
+		AE114BE62D80626000B1F665 /* habitData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = habitData.json; sourceTree = "<group>"; };
+		AE114BEE2D80688600B1F665 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		AEF682D62D804709004ABEF7 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,7 +67,10 @@
 				481E7A102D7E2744006EB49E /* Models */,
 				481E79FD2D7789E1006EB49E /* HabitTrackerApp.swift */,
 				481E79FF2D7789E1006EB49E /* ContentView.swift */,
+				AE114BE62D80626000B1F665 /* habitData.json */,
 				AEF682D62D804709004ABEF7 /* CalendarView.swift */,
+				AE114BEE2D80688600B1F665 /* DataController.swift */,
+				AE114BE32D804F9D00B1F665 /* CurrentHabits.xcdatamodeld */,
 				481E7A012D7789E3006EB49E /* Assets.xcassets */,
 				481E7A032D7789E3006EB49E /* HabitTracker.entitlements */,
 				481E7A042D7789E3006EB49E /* Preview Content */,
@@ -86,8 +91,6 @@
 		481E7A102D7E2744006EB49E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				481E7A112D7E2777006EB49E /* DailyHabits.swift */,
-				481E7A132D7E290F006EB49E /* Habit.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				481E7A062D7789E3006EB49E /* Preview Assets.xcassets in Resources */,
+				AE114BE72D80627100B1F665 /* habitData.json in Resources */,
 				481E7A022D7789E3006EB49E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,12 +166,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE114BE52D804F9D00B1F665 /* CurrentHabits.xcdatamodeld in Sources */,
 				481E7A002D7789E1006EB49E /* ContentView.swift in Sources */,
 				AEF682D72D804709004ABEF7 /* CalendarView.swift in Sources */,
-				481E7A142D7E290F006EB49E /* Habit.swift in Sources */,
+				AE114BEF2D80688600B1F665 /* DataController.swift in Sources */,
 				481E7A0F2D7E26F2006EB49E /* DailyHabitView.swift in Sources */,
 				481E7A162D7E29A9006EB49E /* HabitView.swift in Sources */,
-				481E7A122D7E2777006EB49E /* DailyHabits.swift in Sources */,
 				481E79FE2D7789E1006EB49E /* HabitTrackerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,6 +386,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		AE114BE32D804F9D00B1F665 /* CurrentHabits.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AE114BE42D804F9D00B1F665 /* CurrentHabits.xcdatamodel */,
+			);
+			currentVersion = AE114BE42D804F9D00B1F665 /* CurrentHabits.xcdatamodel */;
+			path = CurrentHabits.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 481E79F22D7789E1006EB49E /* Project object */;
 }

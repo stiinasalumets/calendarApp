@@ -8,14 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(entity: CurrentHabits.entity(), sortDescriptors: []) var habits: FetchedResults<CurrentHabits>
+
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        Button("add"){
+            let currentHabit = CurrentHabits(context: moc)
+            currentHabit.id = UUID()
+            currentHabit.title = "Morning Run"
+            currentHabit.isActive = true
+            currentHabit.interval = "Monday,Wednesday,Friday"
+            try? moc.save()
         }
-        .padding()
     }
 }
 
