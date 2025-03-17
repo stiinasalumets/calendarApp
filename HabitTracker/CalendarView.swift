@@ -33,7 +33,7 @@ struct CalendarView: View {
             
             GeometryReader { geometry in
                 VStack(spacing: 0) {
-                    let habitsData = (0..<7).map { _ in
+                    let habitsData: [(totalHabits: Int, completedHabits: Int)] = (0..<7).map { _ in
                         let totalHabits = Int.random(in: 0...50)
                         let completedHabits = Int.random(in: 0...totalHabits)
                         return (totalHabits, completedHabits)
