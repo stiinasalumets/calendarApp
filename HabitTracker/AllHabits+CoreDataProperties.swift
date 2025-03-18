@@ -16,6 +16,7 @@ extension AllHabits {
         return NSFetchRequest<AllHabits>(entityName: "AllHabits")
     }
 
+
     @NSManaged public var id: UUID?
     @NSManaged public var interval: String?
     @NSManaged public var isActive: Bool
