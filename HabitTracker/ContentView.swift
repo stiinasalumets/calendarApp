@@ -8,14 +8,36 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: []) var allHabits: FetchedResults<AllHabits>
+    
+    
+    
     var body: some View {
+        var habits: [AllHabits] = []
+        
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            if let model = moc.persistentStoreCoordinator?.managedObjectModel {
+                let entityNames = model.entities.map { $0.name ?? "Unknown" }.joined(separator: ", ")
+                Text("Loaded Entities: \(entityNames)")
+            } else {
+                Text("No Core Data Model Found")
+            }
+
+            List(habits) { habit in
+                Text(habit.title ?? "unknown")
+            }
+            Button("Add"){
+                let habit = AllHabits(context: moc)
+                habit.id = UUID()
+                habit.interval = "Monday,Tuesday"
+                habit.title = "drink water"
+                habit.isActive = true
+                habits.append(habit)
+                
+                try? moc.save()
+            }
         }
-        .padding()
     }
 }
 

@@ -6,16 +6,34 @@ struct CalendarView: View {
     var body: some View {
         VStack {
             HStack {
+                let localDate = Date()
+                let localWeekStart = localDate.startOfWeek()
+                Button(action: {
+                    currentWeekStart = localWeekStart
+                }) {
+                    Text("Present")
+                        .font(.headline)
+                        .padding(8)
+                        .background(Color.white)
+                        .cornerRadius(8)
+                }
+                
                 Button(action: {
                     currentWeekStart = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: currentWeekStart) ?? currentWeekStart
                 }) {
                     Image(systemName: "chevron.left")
                 }
                 
-                Spacer()
-                
                 Text(currentWeekStart.formatAsWeekRange())
                     .font(.headline)
+                
+                if localWeekStart != currentWeekStart {
+                    Button(action: {
+                        currentWeekStart = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: currentWeekStart) ?? currentWeekStart
+                    }) {
+                        Image(systemName: "chevron.right")
+                    }
+                }
                 
                 Spacer()
                 
