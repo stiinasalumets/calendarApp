@@ -1,32 +1,36 @@
 import SwiftUI
+import CoreData
 
 struct CalendarView: View {
+    @Environment(\.managedObjectContext) private var moc
+    @FetchRequest(entity: DailyHabits.entity(), sortDescriptors: []) private var dailyHabits: FetchedResults<DailyHabits>
+
     @State private var currentWeekStart: Date = Date().startOfWeek()
-    
+
     var body: some View {
         VStack {
+            // Navigation Controls
             HStack {
                 let localDate = Date()
                 let localWeekStart = localDate.startOfWeek()
-                Button(action: {
-                    currentWeekStart = localWeekStart
-                }) {
+
+                Button(action: { currentWeekStart = localWeekStart }) {
                     Text("Present")
                         .font(.headline)
                         .padding(8)
                         .background(Color.white)
                         .cornerRadius(8)
                 }
-                
+
                 Button(action: {
                     currentWeekStart = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: currentWeekStart) ?? currentWeekStart
                 }) {
                     Image(systemName: "chevron.left")
                 }
-                
+
                 Text(currentWeekStart.formatAsWeekRange())
                     .font(.headline)
-                
+
                 if localWeekStart != currentWeekStart {
                     Button(action: {
                         currentWeekStart = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: currentWeekStart) ?? currentWeekStart
@@ -34,33 +38,17 @@ struct CalendarView: View {
                         Image(systemName: "chevron.right")
                     }
                 }
-                
-                Spacer()
-                
-                Button(action: {
-                    // ToDo
-                }) {
-                    Text("New Habit")
-                        .font(.headline)
-                        .padding(8)
-                        .background(Color.white)
-                        .cornerRadius(8)
-                }
             }
             .padding()
-            
+
             GeometryReader { geometry in
                 VStack(spacing: 0) {
-                    let habitsData: [(totalHabits: Int, completedHabits: Int)] = (0..<7).map { _ in
-                        let totalHabits = Int.random(in: 0...50)
-                        let completedHabits = Int.random(in: 0...totalHabits)
-                        return (totalHabits, completedHabits)
-                    }
-                    
                     ForEach(0..<7, id: \.self) { offset in
-                        let (totalHabits, completedHabits) = habitsData[offset]
                         let day = Calendar.current.date(byAdding: .day, value: offset, to: currentWeekStart)!
-                        
+                        let habitsForDay = dailyHabits.filter { $0.date?.isSameDay(as: day) ?? false }
+                        let totalHabits = habitsForDay.count
+                        let completedHabits = habitsForDay.filter { $0.isCompleted }.count
+
                         HStack(spacing: 0) {
                             Text("\(day.formatAsDayOfWeek()) \(day.formatAsDayNumber())")
                                 .font(.headline)
@@ -82,7 +70,6 @@ struct CalendarView: View {
                 }
             }
             .padding()
-
         }
     }
 }
@@ -91,7 +78,7 @@ extension Date {
     func startOfWeek() -> Date {
         Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))!
     }
-    
+
     func formatAsWeekRange() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d"
@@ -99,20 +86,21 @@ extension Date {
         let end = formatter.string(from: Calendar.current.date(byAdding: .day, value: 6, to: self)!)
         return "\(start) - \(end)"
     }
-    
+
     func formatAsDayOfWeek() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEE"
         return formatter.string(from: self)
     }
-    
+
     func formatAsDayNumber() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "d"
         return formatter.string(from: self)
     }
-}
 
-#Preview {
-    CalendarView()
+    func isSameDay(as other: Date) -> Bool {
+        let calendar = Calendar.current
+        return calendar.isDate(self, inSameDayAs: other)
+    }
 }

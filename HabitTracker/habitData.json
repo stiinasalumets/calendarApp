@@ -1,0 +1,62 @@
+[
+    {
+        "title": "Morning Run",
+        "isActive": true,
+        "interval": "Monday,Wednesday,Friday",
+        "id": "550e8400-e29b-41d4-a716-446655440000"
+    },
+    {
+        "title": "Read a Book",
+        "isActive": true,
+        "interval": "Tuesday,Thursday,Saturday",
+        "id": "550e8400-e29b-41d4-a716-446655440001"
+    },
+    {
+        "title": "Meditation",
+        "isActive": false,
+        "interval": "Tuesday,Sunday",
+        "id": "550e8400-e29b-41d4-a716-446655440002"
+    },
+    {
+        "title": "Yoga",
+        "isActive": true,
+        "interval": "Monday,Wednesday,Saturday",
+        "id": "550e8400-e29b-41d4-a716-446655440003"
+    },
+    {
+        "title": "Write Journal",
+        "isActive": true,
+        "interval": "Monday,Tuesday,Wednesday,Thurdsay,Saturday,Sunday",
+        "id": "550e8400-e29b-41d4-a716-446655440004"
+    },
+    {
+        "title": "Workout",
+        "isActive": false,
+        "interval": "Monday,Thursday",
+        "id": "550e8400-e29b-41d4-a716-446655440005"
+    },
+    {
+        "title": "Grocery Shopping",
+        "isActive": true,
+        "interval": "Sunday",
+        "id": "550e8400-e29b-41d4-a716-446655440006"
+    },
+    {
+        "title": "Call Family",
+        "isActive": false,
+        "interval": "Wednesday,Saturday",
+        "id": "550e8400-e29b-41d4-a716-446655440007"
+    },
+    {
+        "title": "Learning a New Language",
+        "isActive": true,
+        "interval": "Tuesday,Thursday,Sunday",
+        "id": "550e8400-e29b-41d4-a716-446655440008"
+    },
+    {
+        "title": "Cooking Experiment",
+        "isActive": false,
+        "interval": "Friday",
+        "id": "550e8400-e29b-41d4-a716-446655440009"
+    }
+]
