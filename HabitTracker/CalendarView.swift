@@ -9,7 +9,7 @@ struct CalendarView: View {
                 let localDate = Date()
                 let localWeekStart = localDate.startOfWeek()
                 Button(action: {
-                    currentWeekStart = localWeekStart
+                    currentWeekStart = localDate
                 }) {
                     Text("Present")
                         .font(.headline)
@@ -49,33 +49,37 @@ struct CalendarView: View {
             }
             .padding()
             
-            GeometryReader { geometry in
-                VStack(spacing: 0) {
-                    let habitsData: [(totalHabits: Int, completedHabits: Int)] = (0..<7).map { _ in
-                        let totalHabits = Int.random(in: 0...50)
-                        let completedHabits = Int.random(in: 0...totalHabits)
-                        return (totalHabits, completedHabits)
-                    }
-                    
-                    ForEach(0..<7, id: \.self) { offset in
-                        let (totalHabits, completedHabits) = habitsData[offset]
-                        let day = Calendar.current.date(byAdding: .day, value: offset, to: currentWeekStart)!
+            NavigationStack{
+                GeometryReader { geometry in
+                    VStack(spacing: 0) {
+                        let habitsData: [(totalHabits: Int, completedHabits: Int)] = (0..<7).map { _ in
+                            let totalHabits = Int.random(in: 0...50)
+                            let completedHabits = Int.random(in: 0...totalHabits)
+                            return (totalHabits, completedHabits)
+                        }
                         
-                        HStack(spacing: 0) {
-                            Text("\(day.formatAsDayOfWeek()) \(day.formatAsDayNumber())")
-                                .font(.headline)
-                                .frame(width: geometry.size.width * 0.15, height: geometry.size.height / 7)
-
-                            if totalHabits > 0 {
-                                ForEach(0..<totalHabits, id: \.self) { index in
-                                    Rectangle()
-                                        .fill(index < completedHabits ? Color(red: 1.0, green: 0.78, blue: 0.86) : Color.white)
-                                        .frame(width: (geometry.size.width * 0.85) / CGFloat(totalHabits), height: geometry.size.height / 14)
+                        ForEach(0..<7, id: \.self) { offset in
+                            let (totalHabits, completedHabits) = habitsData[offset]
+                            let day = Calendar.current.date(byAdding: .day, value: offset, to: currentWeekStart)!
+                            
+                            NavigationLink (destination: Text("Habits")){
+                                HStack(spacing: 0) {
+                                    Text("\(day.formatAsDayOfWeek()) \(day.formatAsDayNumber())")
+                                        .font(.headline)
+                                        .frame(width: geometry.size.width * 0.15, height: geometry.size.height / 7)
+                                    
+                                    if totalHabits > 0 {
+                                        ForEach(0..<totalHabits, id: \.self) { index in
+                                            Rectangle()
+                                                .fill(index < completedHabits ? Color(red: 1.0, green: 0.78, blue: 0.86) : Color.white)
+                                                .frame(width: (geometry.size.width * 0.85) / CGFloat(totalHabits), height: geometry.size.height / 14)
+                                        }
+                                    } else {
+                                        Rectangle()
+                                            .fill(Color.white)
+                                            .frame(width: (geometry.size.width * 0.85), height: geometry.size.height / 14)
+                                    }
                                 }
-                            } else {
-                                Rectangle()
-                                    .fill(Color.white)
-                                    .frame(width: (geometry.size.width * 0.85), height: geometry.size.height / 14)
                             }
                         }
                     }
