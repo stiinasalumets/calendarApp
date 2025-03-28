@@ -5,14 +5,15 @@ struct CalendarView: View {
     @Environment(\.managedObjectContext) private var moc
     @FetchRequest(entity: DailyHabits.entity(), sortDescriptors: []) private var dailyHabits: FetchedResults<DailyHabits>
 
-    @State private var currentWeekStart: Date = Date().startOfWeek()
+    @State private var currentWeekStart: Date = Calendar.current.date(byAdding: .day, value: -6, to: Date()) ?? Date()
 
     var body: some View {
         VStack {
             // Navigation Controls
             HStack {
                 let localDate = Date()
-                let localWeekStart = localDate.startOfWeek()
+                let localWeekStart = Calendar.current.date(byAdding: .day, value: -6, to: localDate) ?? localDate
+                
 
                 Button(action: { currentWeekStart = localWeekStart }) {
                     Text("Present")
@@ -41,33 +42,47 @@ struct CalendarView: View {
             }
             .padding()
 
+            NavigationView {
             GeometryReader { geometry in
                 VStack(spacing: 0) {
-                    ForEach(0..<7, id: \.self) { offset in
-                        let day = Calendar.current.date(byAdding: .day, value: offset, to: currentWeekStart)!
-                        let habitsForDay = dailyHabits.filter { $0.date?.isSameDay(as: day) ?? false }
-                        let totalHabits = habitsForDay.count
-                        let completedHabits = habitsForDay.filter { $0.isCompleted }.count
-
-                        HStack(spacing: 0) {
-                            Text("\(day.formatAsDayOfWeek()) \(day.formatAsDayNumber())")
-                                .font(.headline)
-                                .frame(width: geometry.size.width * 0.15, height: geometry.size.height / 7)
-
-                            if totalHabits > 0 {
-                                ForEach(0..<totalHabits, id: \.self) { index in
-                                    Rectangle()
-                                        .fill(index < completedHabits ? Color(red: 1.0, green: 0.78, blue: 0.86) : Color.white)
-                                        .frame(width: (geometry.size.width * 0.85) / CGFloat(totalHabits), height: geometry.size.height / 14)
+                    
+                        ForEach(0..<7, id: \.self) { offset in
+                            
+                            let day = Calendar.current.date(byAdding: .day, value: offset, to: currentWeekStart)!
+                            let habitsForDay = dailyHabits.filter { $0.date?.isSameDay(as: day) ?? false }
+                            let totalHabits = habitsForDay.count
+                            let completedHabits = habitsForDay.filter { $0.isCompleted }.count
+                            
+                            NavigationLink(destination: DailyHabitView(currentDate: day)) {
+                                HStack(spacing: 0) {
+                                    
+                                    Text("\(day.formatAsDayOfWeek()) \(day.formatAsDayNumber())")
+                                        .font(.headline)
+                                        .frame(width: UIScreen.main.bounds.width * 0.15, height: UIScreen.main.bounds.height / 15)
+                                        //.frame(width: geometry.size.width * 0.15, height: geometry.size.height / 7)
+                                    
+                                    if totalHabits > 0 {
+                                        ForEach(0..<totalHabits, id: \.self) { index in
+                                            Rectangle()
+                                                .fill(index < completedHabits ? Color(red: 1.0, green: 0.78, blue: 0.86) : Color.white)
+                                                .frame(width: (geometry.size.width * 0.85) / CGFloat(totalHabits), height: geometry.size.height / 14)
+                                        }
+                                    } else {
+                                        Rectangle()
+                                            .fill(Color.white)
+                                            .frame(width: (geometry.size.width * 0.85), height: geometry.size.height / 14)
+                                    }
                                 }
-                            } else {
-                                Rectangle()
-                                    .fill(Color.white)
-                                    .frame(width: (geometry.size.width * 0.85), height: geometry.size.height / 14)
+                                .frame(maxWidth: .infinity)
                             }
+                            
                         }
+                        
                     }
+                    
                 }
+                .ignoresSafeArea(edges: .bottom)
+                
             }
             .padding()
         }
