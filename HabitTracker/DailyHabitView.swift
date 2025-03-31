@@ -1,14 +1,11 @@
-
-import Foundation
 import SwiftUI
 import CoreData
 
 struct DailyHabitView: View {
     @Environment(\.managedObjectContext) var moc
+    @Environment(\.presentationMode) var presentationMode  // For back button
     
     let currentDate: Date
-
-    let dateFormatter = DateFormatter()
     
     var dayOfTheWeek: String {
         let dateFormatter = DateFormatter()
@@ -17,7 +14,7 @@ struct DailyHabitView: View {
     }
     
     var fetchRequest: FetchRequest<DailyHabits>
-    var dailyHabits: FetchedResults<DailyHabits> { fetchRequest.wrappedValue }
+    @FetchRequest(entity: DailyHabits.entity(), sortDescriptors: []) private var dailyHabits: FetchedResults<DailyHabits>
     
     init(currentDate: Date) {
         self.currentDate = currentDate
@@ -29,35 +26,47 @@ struct DailyHabitView: View {
         )
     }
     
-    
-    
-    
-
-   
-
-   //let habits = Habit.sampleData
-   //var filteredHabits : [Habit] { filterHabits(habits: habits, day: WeekDays(rawValue: dayOfTheWeek) ?? WeekDays.Monday)}
-  
-  
     var body: some View {
         VStack {
-            Text(dayOfTheWeek)
-           
-            Spacer()
+            HStack {
+                Button(action: { presentationMode.wrappedValue.dismiss() }) {
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(.black)
+                        .font(.title2)
+                }
+                .padding(.leading)
+                
+                Spacer()
+                
+                Text(dayOfTheWeek)
+                    .font(.title)
+                    .fontWeight(.bold)
+                
+                Spacer()
+            }
+            .padding(.vertical)
             
-            Text("Habit list here")
+            let habitsForDay = dailyHabits.filter { $0.date?.isSameDay(as: currentDate) ?? false }
             
-            //List(dailyHabits, id: \.title) { habit in
-                //HabitView(habit: habit)
-            //}
-            List(dailyHabits) {habit in Text("Some habit")}
+            if habitsForDay.isEmpty {
+                Text("No habits for today.")
+                    .foregroundColor(.gray)
+                    .padding()
+            } else {
+                // Styled List
+                List(habitsForDay, id: \.id) { habit in
+                    Text(habit.habit?.title ?? "Unknown Habit")
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .listStyle(PlainListStyle()) // Cleaner look
+                .frame(maxWidth: .infinity, maxHeight: .infinity) // Expand list
+                .background(Color.white) // White background
+                .cornerRadius(12) // Smooth edges
+                .shadow(radius: 4) // Subtle shadow
+                .padding(.horizontal, 16)
+            }
         }
-        
+        .padding(.top)
     }
 }
-
-//struct DailyHabitView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DailyHabitView()
-//    }
-//}
