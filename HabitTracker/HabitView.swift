@@ -1,29 +1,24 @@
-////
-////  HabitView.swift
-////  HabitTracker
-////
-////  Created by Sandie Petersen on 09/03/2025.
-////
+
 //
-//import Foundation
-//import SwiftUI
+import Foundation
+import SwiftUI
 //
-//struct HabitView: View {
-//    let habit: Habit
-//    var body: some View {
-//        HStack {
-//            Text(habit.title)
-//            
-//            Spacer()
-//            
-//            Toggle(isOn: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Is On@*/.constant(true)/*@END_MENU_TOKEN@*/) {
-//                        
-//                    }
-//        }.padding()
-//        
-//        
-//    }
-//}
+struct HabitView: View {
+    let habit: DailyHabits
+    var body: some View {
+        HStack {
+            //Text(habit.) Change to fetch title
+            Text("Some habit")
+            Spacer()
+            
+            Toggle(isOn: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Is On@*/.constant(true)/*@END_MENU_TOKEN@*/) {
+                        
+                    }
+        }.padding()
+        
+        
+    }
+}
 //
 //
 //struct HabitView_Previews: PreviewProvider {

@@ -92,6 +92,7 @@
 			children = (
 				E1DD84082D954BC100884491 /* AddView.swift */,
 				E160D06F2D8AC9B700CF27EA /* habitView.swift */,
+				481E7A0E2D7E26F2006EB49E /* DailyHabitView.swift */,
 				E160D0522D8991FB00CF27EA /* BottomBarView.swift */,
 				E160D0542D89985500CF27EA /* BottombarButtonView.swift */,
 				481E79FD2D7789E1006EB49E /* HabitTrackerApp.swift */,
@@ -105,7 +106,6 @@
 				E160D0612D899CFF00CF27EA /* settings.png */,
 				481E7A032D7789E3006EB49E /* HabitTracker.entitlements */,
 				481E7A042D7789E3006EB49E /* Preview Content */,
-				481E7A0E2D7E26F2006EB49E /* DailyHabitView.swift */,
 				481E7A152D7E29A9006EB49E /* HabitView.swift */,
 				AE114BF02D88778900B1F665 /* HabitTracker.xcdatamodeld */,
 				AE114C052D887D5A00B1F665 /* DataController.swift */,
