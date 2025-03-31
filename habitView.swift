@@ -1,9 +1,3 @@
-//
-//  habitView.swift
-//  HabitTracker
-//
-//  Created by Andreas Petersen on 19/03/2025.
-//
 
 import Foundation
 import SwiftUI
@@ -19,26 +13,10 @@ struct habitView: View {
     
     var body: some View {
         VStack {
-            if let model = moc.persistentStoreCoordinator?.managedObjectModel {
-                let entityNames = model.entities.map { $0.name ?? "Unknown" }.joined(separator: ", ")
-                Text("Loaded Entities: \(entityNames)")
-            } else {
-                Text("No Core Data Model Found")
-            }
-            
             List(allHabits) { habit in
                 Text(habit.title ?? "unknown")
             }
             
-            Button("Add") {
-                let habit = AllHabits(context: moc)
-                habit.id = UUID()
-                habit.interval = "Monday,Tuesday"
-                habit.title = "Drink Water"
-                habit.isActive = true
-                
-                try? moc.save()
-            }
         }
     }
 }
