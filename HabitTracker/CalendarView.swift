@@ -56,7 +56,6 @@ struct CalendarView: View {
                                 tag: day,
                                 selection: $selectedDay,
                                 destination: {
-                                    // When in DailyHabitView, you might also hide the navigation bar if desired:
                                     DailyHabitView(currentDate: day)
                                         .navigationBarHidden(true)
                                 },
