@@ -2,13 +2,17 @@ import SwiftUI
 import CoreData
 
 struct AddView: View {
-    @Environment(\.managedObjectContext) private var moc
     @State private var title: String = ""
     @State private var selectedDays: Set<String> = []
     @Binding var selectedTab: BottomBarTabs
-    
+    @State private var viewModel: ViewModel
     let daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-
+    
+    init(selectedTab: Binding<BottomBarTabs>, moc: NSManagedObjectContext) {
+        self._selectedTab = selectedTab
+        self._viewModel = State(wrappedValue: ViewModel(moc: moc))
+    }
+    
     var body: some View {
         Form {
             Section(header: Text("Habit Details")) {
@@ -35,7 +39,7 @@ struct AddView: View {
 
             Section {
                 Button("Add Habit") {
-                    addHabit()
+                    viewModel.addHabit(title: title, selectedDays: selectedDays)
                     selectedTab = .habit
                 }
                 .disabled(title.isEmpty || selectedDays.isEmpty)
@@ -44,17 +48,5 @@ struct AddView: View {
         .navigationTitle("Add Habit")
     }
 
-    private func addHabit() {
-        let newHabit = AllHabits(context: moc)
-        newHabit.id = UUID()
-        newHabit.title = title
-        newHabit.isActive = true
-        newHabit.interval = selectedDays.sorted().joined(separator: ",")
-
-        do {
-            try moc.save()
-        } catch {
-            print("❌ Error saving habit: \(error.localizedDescription)")
-        }
-    }
+    
 }
