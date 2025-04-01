@@ -4,25 +4,26 @@ import SwiftUI
 import CoreData
 
 struct habitView: View {
-    @Environment(\.managedObjectContext) var moc
     
-    @FetchRequest(
-        entity: AllHabits.entity(),
-        sortDescriptors: []
-    ) var allHabits: FetchedResults<AllHabits>
-    
-    var body: some View {
-        VStack {
-            List(allHabits) { habit in
-                Text(habit.title ?? "unknown")
-            }
-            
+    @StateObject private var viewModel: ViewModel
+
+        init(moc: NSManagedObjectContext) {
+            _viewModel = StateObject(wrappedValue: ViewModel(moc: moc))
         }
-    }
+        
+        var body: some View {
+            VStack {
+                Text("Habits")
+                
+                List(viewModel.allHabits, id: \.self) { habit in
+                    Text(habit.title ?? "Unknown")
+                }
+            }
+        }
 }
 
-struct habitView_Previews: PreviewProvider {
-    static var previews: some View {
-        habitView()
-    }
-}
+//struct habitView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        habitView()
+//    }
+//}

@@ -12,7 +12,7 @@ struct ContentView: View {
             }
             
             if selectedTab == .habit {
-                habitView()
+                habitView(moc: moc)
             }
             
             if selectedTab == .add {
