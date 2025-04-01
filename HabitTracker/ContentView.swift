@@ -3,6 +3,7 @@ import CoreData
 
 struct ContentView: View {
     @State var selectedTab: BottomBarTabs = .calendar
+    @Environment(\.managedObjectContext) private var moc
     
     var body: some View {
         VStack {
@@ -15,7 +16,7 @@ struct ContentView: View {
             }
             
             if selectedTab == .add {
-                AddView(selectedTab: $selectedTab)
+                AddView(selectedTab: $selectedTab, moc: moc)
             }
             
             if selectedTab == .statistics {

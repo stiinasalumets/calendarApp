@@ -2,7 +2,6 @@ import SwiftUI
 import CoreData
 
 struct DailyHabitView: View {
-    @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode  // For back button
     
     let currentDate: Date
