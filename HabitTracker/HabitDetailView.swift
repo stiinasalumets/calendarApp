@@ -8,13 +8,20 @@ struct HabitDetailView: View {
     var habitID: NSManagedObjectID
     var moc: NSManagedObjectContext
     @Binding var selectedTab: BottomBarTabs
+    @State private var selectedDays: Set<String> = []
     
     init(habit: AllHabits, habitID: NSManagedObjectID, selectedTab: Binding<BottomBarTabs>, moc: NSManagedObjectContext) {
         self.habit = habit
         self.habitID = habitID
         self.moc = moc
         self._selectedTab = selectedTab
+        
+        if let intervalString = habit.interval {
+                    let intervalDaysArray = intervalString.components(separatedBy: ",")
+                    self._selectedDays = State(initialValue: Set(intervalDaysArray.map { $0.trimmingCharacters(in: .whitespaces) }))
+                }
     }
+    
     
     
     var body: some View {
@@ -47,8 +54,10 @@ struct HabitDetailView: View {
         }
         
         HStack {
-            Button("Edit") {
-                EditView(selectedTab: $selectedTab, moc: moc)
+            var title = habit.title ?? ""
+            
+            NavigationLink(destination: EditView(selectedTab: $selectedTab, moc: moc, title: title, selectedDays: selectedDays )) {
+                Text("Edit")
             }
             
             Spacer()
