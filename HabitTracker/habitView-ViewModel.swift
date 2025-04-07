@@ -9,12 +9,13 @@ extension habitView {
             
             init(moc: NSManagedObjectContext) {
                 self.moc = moc
-                fetchHabits()
+                fetchHabits(isActive: true)
             }
             
-            func fetchHabits() {
+            func fetchHabits(isActive: Bool) {
                 let request: NSFetchRequest<AllHabits> = AllHabits.fetchRequest()
                 request.sortDescriptors = []
+                request.predicate = NSPredicate(format: "isActive == %@", NSNumber(value: isActive))
                 
                 do {
                     self.allHabits = try moc.fetch(request)

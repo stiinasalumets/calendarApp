@@ -50,20 +50,26 @@ struct HabitDetailView: View {
                 List(intervalDays, id: \.self) { day in
                     Text(day)
                 }
+                
+                
             }
+            
         }
         
         HStack {
             var title = habit.title ?? ""
             
-            NavigationLink(destination: EditView(selectedTab: $selectedTab, moc: moc, title: title, selectedDays: selectedDays )) {
+            NavigationLink(destination: EditView(selectedTab: $selectedTab, moc: moc, title: title, selectedDays: selectedDays, habitID: habitID )) {
                 Text("Edit")
             }
             
             Spacer()
             
-            Button("Delete") {
+            NavigationLink(destination: deleteView(selectedTab: $selectedTab, moc: moc, habitID: habitID)) {
+                Text("Delete")
             }
+            
+            
         }.padding()
         
         

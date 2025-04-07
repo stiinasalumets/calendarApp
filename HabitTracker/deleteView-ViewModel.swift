@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 import CoreData
 
-extension HabitForm {
+extension deleteView {
     class ViewModel: ObservableObject {
         
         private var moc: NSManagedObjectContext
@@ -11,27 +11,13 @@ extension HabitForm {
             self.moc = moc
         }
         
-        func addHabit(title: String, selectedDays: Set<String>) {
-            let newHabit = AllHabits(context: moc)
-            newHabit.id = UUID()
-            newHabit.title = title
-            newHabit.isActive = true
-            newHabit.interval = selectedDays.sorted().joined(separator: ",")
-            
-            do {
-                try moc.save()
-            } catch {
-                print("❌ Error saving habit: \(error.localizedDescription)")
-            }
-        }
         
-        func updateHabit(title: String, selectedDays: Set<String>, habitID: NSManagedObjectID) {
+        
+        func deleteHabit(habitID: NSManagedObjectID) {
             do {
                 // Fetch the existing habit by ID
                 if let habit = try moc.existingObject(with: habitID) as? AllHabits {
-                    habit.title = title
-                    habit.interval = selectedDays.sorted().joined(separator: ",")
-                    habit.isActive = true
+                    habit.isActive = false
 
                     // Save changes
                     try moc.save()
