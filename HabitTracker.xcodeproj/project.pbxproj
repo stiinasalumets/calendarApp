@@ -21,6 +21,8 @@
 		AEA3B33D2D9BC0CB00F7312F /* habitData.json in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B33C2D9BC0CB00F7312F /* habitData.json */; };
 		AEA3B33F2D9BD8A600F7312F /* habitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B33E2D9BD8A600F7312F /* habitView.swift */; };
 		AEEBB93D2D9BE8120086DA58 /* addView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEBB93C2D9BE8120086DA58 /* addView-ViewModel.swift */; };
+		AEEBB9422D9BFEEB0086DA58 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEBB9412D9BFEEB0086DA58 /* ProgressBarView.swift */; };
+		AEEBB9442D9C00F20086DA58 /* ProgressBarView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEBB9432D9C00F20086DA58 /* ProgressBarView-ViewModel.swift */; };
 		AEF682D72D804709004ABEF7 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF682D62D804709004ABEF7 /* CalendarView.swift */; };
 		E160D0532D8991FB00CF27EA /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E160D0522D8991FB00CF27EA /* BottomBarView.swift */; };
 		E160D0552D89985500CF27EA /* BottombarButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E160D0542D89985500CF27EA /* BottombarButtonView.swift */; };
@@ -52,6 +54,8 @@
 		AEA3B33C2D9BC0CB00F7312F /* habitData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = habitData.json; sourceTree = "<group>"; };
 		AEA3B33E2D9BD8A600F7312F /* habitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = habitView.swift; sourceTree = "<group>"; };
 		AEEBB93C2D9BE8120086DA58 /* addView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "addView-ViewModel.swift"; sourceTree = "<group>"; };
+		AEEBB9412D9BFEEB0086DA58 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
+		AEEBB9432D9C00F20086DA58 /* ProgressBarView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressBarView-ViewModel.swift"; sourceTree = "<group>"; };
 		AEF682D62D804709004ABEF7 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		E160D0522D8991FB00CF27EA /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
 		E160D0542D89985500CF27EA /* BottombarButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottombarButtonView.swift; sourceTree = "<group>"; };
@@ -121,6 +125,8 @@
 				AE114C132D888B9300B1F665 /* DailyHabitsItem */,
 				AE114C142D888BAB00B1F665 /* AllHabitsItem */,
 				AEEBB93C2D9BE8120086DA58 /* addView-ViewModel.swift */,
+				AEEBB9412D9BFEEB0086DA58 /* ProgressBarView.swift */,
+				AEEBB9432D9C00F20086DA58 /* ProgressBarView-ViewModel.swift */,
 			);
 			path = HabitTracker;
 			sourceTree = "<group>";
@@ -232,12 +238,14 @@
 				E1ECA2BB2DA3E4FE00231DDA /* deleteView-ViewModel.swift in Sources */,
 				E1ECA2B92DA3E4E400231DDA /* deleteView.swift in Sources */,
 				E160D0532D8991FB00CF27EA /* BottomBarView.swift in Sources */,
+				AEEBB9422D9BFEEB0086DA58 /* ProgressBarView.swift in Sources */,
 				AE114C122D888B8200B1F665 /* DailyHabits+CoreDataProperties.swift in Sources */,
 				E1ECA2B32D9C12BA00231DDA /* HabitForm-ViewModel.swift in Sources */,
 				481E7A002D7789E1006EB49E /* ContentView.swift in Sources */,
 				E1ECA2B72D9C688F00231DDA /* EditView.swift in Sources */,
 				AEF682D72D804709004ABEF7 /* CalendarView.swift in Sources */,
 				AEEBB93D2D9BE8120086DA58 /* addView-ViewModel.swift in Sources */,
+				AEEBB9442D9C00F20086DA58 /* ProgressBarView-ViewModel.swift in Sources */,
 				481E7A0F2D7E26F2006EB49E /* DailyHabitView.swift in Sources */,
 				AE114C062D887D5A00B1F665 /* DataController.swift in Sources */,
 				E1DD84092D954BC100884491 /* AddView.swift in Sources */,
