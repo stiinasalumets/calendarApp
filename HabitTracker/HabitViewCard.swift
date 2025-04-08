@@ -6,11 +6,15 @@ struct HabitViewCard: View {
     
     var body: some View {
         
-        HStack() {
-                Text(title)
-                Spacer()
-                Image(systemName: "chevron.right")
-            }.padding()
+        VStack() {
+            HStack() {
+                    Text(title)
+                    .padding()
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                    .padding(.trailing, 10)
+                }
+        }
             .background(Color("purple"))
     }
 }

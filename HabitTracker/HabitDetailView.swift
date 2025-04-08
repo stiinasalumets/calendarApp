@@ -65,7 +65,7 @@ struct HabitDetailView: View {
             
             Spacer()
             
-            NavigationLink(destination: deleteView(selectedTab: $selectedTab, moc: moc, habitID: habitID)) {
+            NavigationLink(destination: deleteView(selectedTab: $selectedTab, moc: moc, habitID: habitID, title: title)) {
                 Text("Delete")
             }
             

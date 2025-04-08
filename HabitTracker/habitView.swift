@@ -16,7 +16,7 @@ struct habitView: View {
         
         var body: some View {
             
-            VStack {
+            VStack(spacing: 0) {
                 Text("Habits")
                 
                 GeometryReader { geometry in
@@ -39,13 +39,14 @@ struct habitView: View {
                                     },
                                     label: {
                                         HabitViewCard(title: habit.title ?? "Unknown")
+                                            .padding(.vertical, 0)
                                     }
-                                )
+                                ).buttonStyle(PlainButtonStyle())
                             }.frame(maxWidth: .infinity, maxHeight: .infinity)
-                        }
+                        }.padding(0)
                     }.frame(maxWidth: .infinity, maxHeight: geometry.size.height)
                 }
-            }
+            }.padding(0)
         }
 }
 
