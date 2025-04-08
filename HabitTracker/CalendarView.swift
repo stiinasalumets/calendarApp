@@ -32,7 +32,10 @@ struct CalendarView: View {
                     Text(currentWeekStart.formatAsWeekRange())
                         .font(.headline)
                     
-                    if localWeekStart != currentWeekStart {
+                    
+                    let isAtPresentOrFuture = currentWeekStart >= (Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date())
+                    
+                    if !isAtPresentOrFuture {
                         Button(action: {
                             currentWeekStart = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: currentWeekStart) ?? currentWeekStart
                         }) {
@@ -46,12 +49,14 @@ struct CalendarView: View {
             NavigationView {
                 GeometryReader { geometry in
                     VStack(spacing: 0) {
+                        Spacer(minLength: 0)
+
                         ForEach(0..<7, id: \.self) { offset in
                             let day = Calendar.current.date(byAdding: .day, value: offset, to: currentWeekStart)!
                             let habitsForDay = dailyHabits.filter { $0.date?.isSameDay(as: day) ?? false }
                             let totalHabits = habitsForDay.count
                             let completedHabits = habitsForDay.filter { $0.isCompleted }.count
-                            
+
                             NavigationLink(
                                 tag: day,
                                 selection: $selectedDay,
@@ -60,30 +65,23 @@ struct CalendarView: View {
                                         .navigationBarHidden(true)
                                 },
                                 label: {
-                                    HStack(spacing: 0) {
+                                    HStack {
                                         Text("\(day.formatAsDayOfWeek()) \(day.formatAsDayNumber())")
                                             .font(.headline)
-                                            .frame(width: UIScreen.main.bounds.width * 0.15,
-                                                   height: UIScreen.main.bounds.height / 15)
+                                            .foregroundColor(Color("grey"))
+                                            .frame(width: geometry.size.width * 0.25,
+                                                   alignment: .leading)
+
                                         
-                                        if totalHabits > 0 {
-                                            ForEach(0..<totalHabits, id: \.self) { index in
-                                                Rectangle()
-                                                    .fill(index < completedHabits ? Color(red: 1.0, green: 0.78, blue: 0.86) : Color.white)
-                                                    .frame(width: (geometry.size.width * 0.85) / CGFloat(totalHabits),
-                                                           height: geometry.size.height / 14)
-                                            }
-                                        } else {
-                                            Rectangle()
-                                                .fill(Color.white)
-                                                .frame(width: (geometry.size.width * 0.85),
-                                                       height: geometry.size.height / 14)
-                                        }
+                                        ProgressBarView(moc: moc, totalHabits: totalHabits, completedHabits: completedHabits)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
                                     }
-                                    .frame(maxWidth: .infinity)
+                                    .frame(height: geometry.size.height / 7)
                                 }
                             )
                         }
+
+                        Spacer(minLength: 0)
                     }
                 }
                 .ignoresSafeArea(edges: .bottom)
@@ -120,5 +118,11 @@ extension Date {
 
     func isSameDay(as other: Date) -> Bool {
         Calendar.current.isDate(self, inSameDayAs: other)
+    }
+}
+
+struct CalendarView_Previews: PreviewProvider {
+    static var previews: some View {
+        CalendarView()
     }
 }
