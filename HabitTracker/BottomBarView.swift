@@ -7,6 +7,7 @@ enum BottomBarTabs: Int {
     case add = 2
     case statistics = 3
     case settings = 4
+    case dailyView = 5
 }
 
 struct BottomBarView: View {
@@ -20,6 +21,7 @@ struct BottomBarView: View {
             //Calendar
             Button {
                 selectedTab = .calendar
+
             } label: {
                 ZStack{
                     BottombarButtonView(image: "calendar", isActive: selectedTab == .calendar)
