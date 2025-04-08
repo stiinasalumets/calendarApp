@@ -35,6 +35,8 @@
 		E1ECA2B72D9C688F00231DDA /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2B62D9C688F00231DDA /* EditView.swift */; };
 		E1ECA2B92DA3E4E400231DDA /* deleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2B82DA3E4E300231DDA /* deleteView.swift */; };
 		E1ECA2BB2DA3E4FE00231DDA /* deleteView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2BA2DA3E4FE00231DDA /* deleteView-ViewModel.swift */; };
+		E1ECA2BE2DA54ED100231DDA /* Settings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2BC2DA54ED100231DDA /* Settings+CoreDataClass.swift */; };
+		E1ECA2BF2DA54ED100231DDA /* Settings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2BD2DA54ED100231DDA /* Settings+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +70,8 @@
 		E1ECA2B62D9C688F00231DDA /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		E1ECA2B82DA3E4E300231DDA /* deleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteView.swift; sourceTree = "<group>"; };
 		E1ECA2BA2DA3E4FE00231DDA /* deleteView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "deleteView-ViewModel.swift"; sourceTree = "<group>"; };
+		E1ECA2BC2DA54ED100231DDA /* Settings+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Settings+CoreDataClass.swift"; path = "HabitTracker/Settings/Settings+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E1ECA2BD2DA54ED100231DDA /* Settings+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Settings+CoreDataProperties.swift"; path = "HabitTracker/Settings/Settings+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,8 @@
 		481E79F12D7789E1006EB49E = {
 			isa = PBXGroup;
 			children = (
+				E1ECA2BC2DA54ED100231DDA /* Settings+CoreDataClass.swift */,
+				E1ECA2BD2DA54ED100231DDA /* Settings+CoreDataProperties.swift */,
 				481E79FC2D7789E1006EB49E /* HabitTracker */,
 				481E79FB2D7789E1006EB49E /* Products */,
 			);
@@ -239,11 +245,13 @@
 				E1ECA2B92DA3E4E400231DDA /* deleteView.swift in Sources */,
 				E160D0532D8991FB00CF27EA /* BottomBarView.swift in Sources */,
 				AEEBB9422D9BFEEB0086DA58 /* ProgressBarView.swift in Sources */,
+				E1ECA2BF2DA54ED100231DDA /* Settings+CoreDataProperties.swift in Sources */,
 				AE114C122D888B8200B1F665 /* DailyHabits+CoreDataProperties.swift in Sources */,
 				E1ECA2B32D9C12BA00231DDA /* HabitForm-ViewModel.swift in Sources */,
 				481E7A002D7789E1006EB49E /* ContentView.swift in Sources */,
 				E1ECA2B72D9C688F00231DDA /* EditView.swift in Sources */,
 				AEF682D72D804709004ABEF7 /* CalendarView.swift in Sources */,
+				E1ECA2BE2DA54ED100231DDA /* Settings+CoreDataClass.swift in Sources */,
 				AEEBB93D2D9BE8120086DA58 /* addView-ViewModel.swift in Sources */,
 				AEEBB9442D9C00F20086DA58 /* ProgressBarView-ViewModel.swift in Sources */,
 				481E7A0F2D7E26F2006EB49E /* DailyHabitView.swift in Sources */,
