@@ -84,7 +84,7 @@ struct CalendarView: View {
                         Spacer(minLength: 0)
                     }
                 }
-                .ignoresSafeArea(edges: .bottom)
+                .ignoresSafeArea(edges: [.top, .bottom])
             }
             .padding()
         }
