@@ -25,13 +25,34 @@ struct ContentView: View {
             
             if selectedTab == .settings {
                 Text("Settings")
+                
+                Text(fetchSettings().first?.notificationInterval ?? "default value")
+                
+                
+                
             }
             
             Spacer()
             BottomBarView(selectedTab: $selectedTab)
         }
     }
+    func fetchSettings() -> [Settings] {
+        let request: NSFetchRequest<Settings> = Settings.fetchRequest()
+        request.sortDescriptors = []
+        var setting: [Settings]
+        do {
+             setting = try moc.fetch(request)
+        } catch {
+            setting = []
+            print("Failed to fetch habits: \(error)")
+        }
+        
+        print(setting.count)
+        return setting
+    }
 }
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

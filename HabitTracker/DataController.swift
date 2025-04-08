@@ -18,6 +18,7 @@ class DataController: ObservableObject {
             } else {
                 print("✅ Core Data loaded successfully: \(description.url?.absoluteString ?? "Unknown URL")")
                 self.populateHabitsIfNeeded() // Call method to load JSON data
+                self.populateSettingsIfNeeded()
             }
         }
     }
@@ -30,6 +31,26 @@ class DataController: ObservableObject {
             let count = try context.count(for: fetchRequest)
             if count == 0 {
                 try loadHabitsFromJSON(context: context)
+            }
+        } catch {
+            print("❌ Error checking Core Data: \(error.localizedDescription)")
+        }
+    }
+    
+    func populateSettingsIfNeeded() {
+        let context = container.viewContext
+        let fetchRequest: NSFetchRequest<Settings> = Settings.fetchRequest()
+        
+        do {
+            let count = try context.count(for: fetchRequest)
+            if count == 0 {
+                let setting = Settings(context: context)
+                setting.catPerson = false;
+                setting.dogPerson = true;
+                setting.notificationInterval = "8:00"
+                
+                try context.save()
+                print("Settings loaded into Core Data")
             }
         } catch {
             print("❌ Error checking Core Data: \(error.localizedDescription)")

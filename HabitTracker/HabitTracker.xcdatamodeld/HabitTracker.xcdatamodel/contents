@@ -13,7 +13,7 @@
         <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="habit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AllHabits" inverseName="dailyHabits" inverseEntity="AllHabits"/>
     </entity>
-    <entity name="Settings" representedClassName="Settings" syncable="YES" codeGenerationType="class">
+    <entity name="Settings" representedClassName="Settings" syncable="YES">
         <attribute name="catPerson" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="dogPerson" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="notificationInterval" optional="YES" attributeType="String"/>
