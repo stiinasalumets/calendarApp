@@ -27,6 +27,14 @@
 		E160D0532D8991FB00CF27EA /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E160D0522D8991FB00CF27EA /* BottomBarView.swift */; };
 		E160D0552D89985500CF27EA /* BottombarButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E160D0542D89985500CF27EA /* BottombarButtonView.swift */; };
 		E1DD84092D954BC100884491 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DD84082D954BC100884491 /* AddView.swift */; };
+		E1ECA2AB2D9BFAF400231DDA /* habitView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2AA2D9BFAF400231DDA /* habitView-ViewModel.swift */; };
+		E1ECA2AD2D9BFDAF00231DDA /* HabitForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2AC2D9BFDAF00231DDA /* HabitForm.swift */; };
+		E1ECA2AF2D9BFEBD00231DDA /* HabitViewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2AE2D9BFEBD00231DDA /* HabitViewCard.swift */; };
+		E1ECA2B12D9C026E00231DDA /* HabitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2B02D9C026E00231DDA /* HabitDetailView.swift */; };
+		E1ECA2B32D9C12BA00231DDA /* HabitForm-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2B22D9C12BA00231DDA /* HabitForm-ViewModel.swift */; };
+		E1ECA2B72D9C688F00231DDA /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2B62D9C688F00231DDA /* EditView.swift */; };
+		E1ECA2B92DA3E4E400231DDA /* deleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2B82DA3E4E300231DDA /* deleteView.swift */; };
+		E1ECA2BB2DA3E4FE00231DDA /* deleteView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2BA2DA3E4FE00231DDA /* deleteView-ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +60,14 @@
 		E160D0522D8991FB00CF27EA /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
 		E160D0542D89985500CF27EA /* BottombarButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottombarButtonView.swift; sourceTree = "<group>"; };
 		E1DD84082D954BC100884491 /* AddView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
+		E1ECA2AA2D9BFAF400231DDA /* habitView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "habitView-ViewModel.swift"; sourceTree = "<group>"; };
+		E1ECA2AC2D9BFDAF00231DDA /* HabitForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitForm.swift; sourceTree = "<group>"; };
+		E1ECA2AE2D9BFEBD00231DDA /* HabitViewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewCard.swift; sourceTree = "<group>"; };
+		E1ECA2B02D9C026E00231DDA /* HabitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailView.swift; sourceTree = "<group>"; };
+		E1ECA2B22D9C12BA00231DDA /* HabitForm-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitForm-ViewModel.swift"; sourceTree = "<group>"; };
+		E1ECA2B62D9C688F00231DDA /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
+		E1ECA2B82DA3E4E300231DDA /* deleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteView.swift; sourceTree = "<group>"; };
+		E1ECA2BA2DA3E4FE00231DDA /* deleteView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "deleteView-ViewModel.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,8 +101,16 @@
 			isa = PBXGroup;
 			children = (
 				AEA3B33E2D9BD8A600F7312F /* habitView.swift */,
+				E1ECA2AA2D9BFAF400231DDA /* habitView-ViewModel.swift */,
+				E1ECA2AE2D9BFEBD00231DDA /* HabitViewCard.swift */,
+				E1ECA2B02D9C026E00231DDA /* HabitDetailView.swift */,
+				E1ECA2AC2D9BFDAF00231DDA /* HabitForm.swift */,
+				E1ECA2B22D9C12BA00231DDA /* HabitForm-ViewModel.swift */,
 				AEA3B33C2D9BC0CB00F7312F /* habitData.json */,
+				E1ECA2B62D9C688F00231DDA /* EditView.swift */,
 				E1DD84082D954BC100884491 /* AddView.swift */,
+				E1ECA2B82DA3E4E300231DDA /* deleteView.swift */,
+				E1ECA2BA2DA3E4FE00231DDA /* deleteView-ViewModel.swift */,
 				481E7A0E2D7E26F2006EB49E /* DailyHabitView.swift */,
 				E160D0522D8991FB00CF27EA /* BottomBarView.swift */,
 				E160D0542D89985500CF27EA /* BottombarButtonView.swift */,
@@ -204,14 +228,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1ECA2AB2D9BFAF400231DDA /* habitView-ViewModel.swift in Sources */,
+				E1ECA2B12D9C026E00231DDA /* HabitDetailView.swift in Sources */,
+				E1ECA2AF2D9BFEBD00231DDA /* HabitViewCard.swift in Sources */,
 				E160D0552D89985500CF27EA /* BottombarButtonView.swift in Sources */,
 				AE114C0F2D888B8200B1F665 /* AllHabits+CoreDataClass.swift in Sources */,
 				AE114C102D888B8200B1F665 /* AllHabits+CoreDataProperties.swift in Sources */,
 				AE114C112D888B8200B1F665 /* DailyHabits+CoreDataClass.swift in Sources */,
+				E1ECA2BB2DA3E4FE00231DDA /* deleteView-ViewModel.swift in Sources */,
+				E1ECA2B92DA3E4E400231DDA /* deleteView.swift in Sources */,
 				E160D0532D8991FB00CF27EA /* BottomBarView.swift in Sources */,
 				AEEBB9422D9BFEEB0086DA58 /* ProgressBarView.swift in Sources */,
 				AE114C122D888B8200B1F665 /* DailyHabits+CoreDataProperties.swift in Sources */,
+				E1ECA2B32D9C12BA00231DDA /* HabitForm-ViewModel.swift in Sources */,
 				481E7A002D7789E1006EB49E /* ContentView.swift in Sources */,
+				E1ECA2B72D9C688F00231DDA /* EditView.swift in Sources */,
 				AEF682D72D804709004ABEF7 /* CalendarView.swift in Sources */,
 				AEEBB93D2D9BE8120086DA58 /* addView-ViewModel.swift in Sources */,
 				AEEBB9442D9C00F20086DA58 /* ProgressBarView-ViewModel.swift in Sources */,
@@ -219,6 +250,7 @@
 				AE114C062D887D5A00B1F665 /* DataController.swift in Sources */,
 				E1DD84092D954BC100884491 /* AddView.swift in Sources */,
 				AE114BF22D88778900B1F665 /* HabitTracker.xcdatamodeld in Sources */,
+				E1ECA2AD2D9BFDAF00231DDA /* HabitForm.swift in Sources */,
 				AEA3B33F2D9BD8A600F7312F /* habitView.swift in Sources */,
 				481E79FE2D7789E1006EB49E /* HabitTrackerApp.swift in Sources */,
 			);
@@ -345,7 +377,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HabitTracker/Preview Content\"";
-				DEVELOPMENT_TEAM = 49735NNH9P;
+				DEVELOPMENT_TEAM = J9U7TSST43;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -363,7 +395,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sem6.HabitTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = sem6.HabitTracker2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -384,7 +416,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HabitTracker/Preview Content\"";
-				DEVELOPMENT_TEAM = 49735NNH9P;
+				DEVELOPMENT_TEAM = J9U7TSST43;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -402,7 +434,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sem6.HabitTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = sem6.HabitTracker2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
