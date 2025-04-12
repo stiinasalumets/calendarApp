@@ -37,6 +37,8 @@
 		E1ECA2BB2DA3E4FE00231DDA /* deleteView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2BA2DA3E4FE00231DDA /* deleteView-ViewModel.swift */; };
 		E1ECA2BE2DA54ED100231DDA /* Settings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2BC2DA54ED100231DDA /* Settings+CoreDataClass.swift */; };
 		E1ECA2BF2DA54ED100231DDA /* Settings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2BD2DA54ED100231DDA /* Settings+CoreDataProperties.swift */; };
+		E1ECA2C12DAA461300231DDA /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2C02DAA461300231DDA /* SettingView.swift */; };
+		E1ECA2C32DAA462600231DDA /* SettingView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2C22DAA462600231DDA /* SettingView-ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +74,8 @@
 		E1ECA2BA2DA3E4FE00231DDA /* deleteView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "deleteView-ViewModel.swift"; sourceTree = "<group>"; };
 		E1ECA2BC2DA54ED100231DDA /* Settings+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Settings+CoreDataClass.swift"; path = "HabitTracker/Settings/Settings+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E1ECA2BD2DA54ED100231DDA /* Settings+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Settings+CoreDataProperties.swift"; path = "HabitTracker/Settings/Settings+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E1ECA2C02DAA461300231DDA /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		E1ECA2C22DAA462600231DDA /* SettingView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingView-ViewModel.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,8 @@
 				481E79FD2D7789E1006EB49E /* HabitTrackerApp.swift */,
 				481E79FF2D7789E1006EB49E /* ContentView.swift */,
 				AEF682D62D804709004ABEF7 /* CalendarView.swift */,
+				E1ECA2C02DAA461300231DDA /* SettingView.swift */,
+				E1ECA2C22DAA462600231DDA /* SettingView-ViewModel.swift */,
 				481E7A012D7789E3006EB49E /* Assets.xcassets */,
 				481E7A032D7789E3006EB49E /* HabitTracker.entitlements */,
 				481E7A042D7789E3006EB49E /* Preview Content */,
@@ -237,6 +243,7 @@
 				E1ECA2AB2D9BFAF400231DDA /* habitView-ViewModel.swift in Sources */,
 				E1ECA2B12D9C026E00231DDA /* HabitDetailView.swift in Sources */,
 				E1ECA2AF2D9BFEBD00231DDA /* HabitViewCard.swift in Sources */,
+				E1ECA2C32DAA462600231DDA /* SettingView-ViewModel.swift in Sources */,
 				E160D0552D89985500CF27EA /* BottombarButtonView.swift in Sources */,
 				AE114C0F2D888B8200B1F665 /* AllHabits+CoreDataClass.swift in Sources */,
 				AE114C102D888B8200B1F665 /* AllHabits+CoreDataProperties.swift in Sources */,
@@ -251,6 +258,7 @@
 				481E7A002D7789E1006EB49E /* ContentView.swift in Sources */,
 				E1ECA2B72D9C688F00231DDA /* EditView.swift in Sources */,
 				AEF682D72D804709004ABEF7 /* CalendarView.swift in Sources */,
+				E1ECA2C12DAA461300231DDA /* SettingView.swift in Sources */,
 				E1ECA2BE2DA54ED100231DDA /* Settings+CoreDataClass.swift in Sources */,
 				AEEBB93D2D9BE8120086DA58 /* addView-ViewModel.swift in Sources */,
 				AEEBB9442D9C00F20086DA58 /* ProgressBarView-ViewModel.swift in Sources */,
