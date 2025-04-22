@@ -2,6 +2,7 @@ import SwiftUI
 import CoreData
 
 struct EditView: View {
+    @EnvironmentObject var navManager: NavigationStackManager
     @Binding var selectedTab: BottomBarTabs
     @State private var title: String
     @State private var selectedDays: Set<String> = []

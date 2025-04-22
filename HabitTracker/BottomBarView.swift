@@ -12,6 +12,7 @@ enum BottomBarTabs: Int {
 struct BottomBarView: View {
    
     @Binding var selectedTab:BottomBarTabs
+    @EnvironmentObject var navManager: NavigationStackManager
     
     
     var body: some View {
@@ -19,6 +20,7 @@ struct BottomBarView: View {
         HStack(spacing: 10){
             //Calendar
             Button {
+                navManager.clear()
                 selectedTab = .calendar
             } label: {
                 ZStack{
@@ -28,6 +30,7 @@ struct BottomBarView: View {
             
             //Habits
             Button {
+                navManager.clear()
                 selectedTab = .habit
             } label: {
                 ZStack{
@@ -37,6 +40,7 @@ struct BottomBarView: View {
             
             //Add
             Button {
+                navManager.clear()
                 selectedTab = .add
 
                     } label: {
@@ -60,6 +64,7 @@ struct BottomBarView: View {
             
             //Stats
             Button {
+                navManager.clear()
                 selectedTab = .statistics
             } label: {
                 ZStack{
@@ -69,6 +74,7 @@ struct BottomBarView: View {
             
             //Settings
             Button {
+                navManager.clear()
                 selectedTab = .settings
             } label: {
                 ZStack{

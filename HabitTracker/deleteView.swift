@@ -2,6 +2,7 @@ import SwiftUI
 import CoreData
 
 struct deleteView: View {
+    @EnvironmentObject var navManager: NavigationStackManager
     @Binding var selectedTab: BottomBarTabs
     private var moc: NSManagedObjectContext
     @State private var viewModel: ViewModel
@@ -19,30 +20,31 @@ struct deleteView: View {
     
     var body: some View {
         
-        Spacer()
-        
-        Text("Are you sure you want to delete \(title)")
-        Text("This action cannot be un done")
-        
-        Spacer()
-        
-        
-        HStack {
-            Spacer()
-            Button("Delete") {
-                viewModel.deleteHabit(habitID: habitID)
-                selectedTab = .habit
-            }
+        VStack {
             Spacer()
             
-            Button("Cancel") {
-                
-                selectedTab = .habit
-            }
+            Text("Are you sure you want to delete \(title)")
+            Text("This action cannot be un done")
+            
             Spacer()
+            
+            
+            HStack {
+                Spacer()
+                Button("Delete") {
+                    viewModel.deleteHabit(habitID: habitID)
+                    selectedTab = .habit
+                }
+                Spacer()
+                
+                Button("Cancel") {
+                    
+                    navManager.pop()
+                }
+                Spacer()
+            }
+            
         }
-        
-        
     }
 
     
