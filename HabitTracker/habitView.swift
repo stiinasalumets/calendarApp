@@ -8,12 +8,17 @@ struct habitView: View {
     @State private var selectedHabitID: NSManagedObjectID? = nil
     @Binding var selectedTab: BottomBarTabs
     
+    
     @EnvironmentObject var navManager: NavigationStackManager
     
     init(selectedTab: Binding<BottomBarTabs>, moc: NSManagedObjectContext) {
         self._selectedTab = selectedTab
         _viewModel = StateObject(wrappedValue: ViewModel(moc: moc))
     }
+    
+    
+    
+    
     
     var body: some View {
         VStack(spacing: 0) {
@@ -34,7 +39,7 @@ struct habitView: View {
                                 )
                             )
                         }) {
-                            HabitViewCard(title: habit.title ?? "Unknown")
+                            HabitViewCard(title: habit.title ?? "Unknown", color: viewModel.chooseListColor())
                                 .padding(.vertical, 0)
                         }
                         .buttonStyle(PlainButtonStyle())
@@ -47,6 +52,8 @@ struct habitView: View {
         }
         .padding(0)
     }
+    
+    
 }
 
 //struct habitView_Previews: PreviewProvider {

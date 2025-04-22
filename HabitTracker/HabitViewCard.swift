@@ -3,6 +3,9 @@ import SwiftUI
 
 struct HabitViewCard: View {
     var title: String
+    var color: String
+    
+    
     
     var body: some View {
         
@@ -15,6 +18,6 @@ struct HabitViewCard: View {
                     .padding(.trailing, 10)
                 }
         }
-            .background(Color("purple"))
+        .background(Color(color))
     }
 }
