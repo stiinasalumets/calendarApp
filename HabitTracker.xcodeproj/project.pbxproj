@@ -39,6 +39,8 @@
 		E1ECA2BF2DA54ED100231DDA /* Settings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2BD2DA54ED100231DDA /* Settings+CoreDataProperties.swift */; };
 		E1ECA2C12DAA461300231DDA /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2C02DAA461300231DDA /* SettingView.swift */; };
 		E1ECA2C32DAA462600231DDA /* SettingView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2C22DAA462600231DDA /* SettingView-ViewModel.swift */; };
+		E1EF8DB22DB7736000283627 /* NavigationStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DB12DB7736000283627 /* NavigationStackManager.swift */; };
+		E1EF8DB42DB7753D00283627 /* NavigationContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DB32DB7753D00283627 /* NavigationContainerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +78,8 @@
 		E1ECA2BD2DA54ED100231DDA /* Settings+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Settings+CoreDataProperties.swift"; path = "HabitTracker/Settings/Settings+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E1ECA2C02DAA461300231DDA /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		E1ECA2C22DAA462600231DDA /* SettingView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingView-ViewModel.swift"; sourceTree = "<group>"; };
+		E1EF8DB12DB7736000283627 /* NavigationStackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationStackManager.swift; sourceTree = "<group>"; };
+		E1EF8DB32DB7753D00283627 /* NavigationContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationContainerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,7 +129,9 @@
 				E160D0522D8991FB00CF27EA /* BottomBarView.swift */,
 				E160D0542D89985500CF27EA /* BottombarButtonView.swift */,
 				481E79FD2D7789E1006EB49E /* HabitTrackerApp.swift */,
+				E1EF8DB12DB7736000283627 /* NavigationStackManager.swift */,
 				481E79FF2D7789E1006EB49E /* ContentView.swift */,
+				E1EF8DB32DB7753D00283627 /* NavigationContainerView.swift */,
 				AEF682D62D804709004ABEF7 /* CalendarView.swift */,
 				E1ECA2C02DAA461300231DDA /* SettingView.swift */,
 				E1ECA2C22DAA462600231DDA /* SettingView-ViewModel.swift */,
@@ -244,11 +250,13 @@
 				E1ECA2B12D9C026E00231DDA /* HabitDetailView.swift in Sources */,
 				E1ECA2AF2D9BFEBD00231DDA /* HabitViewCard.swift in Sources */,
 				E1ECA2C32DAA462600231DDA /* SettingView-ViewModel.swift in Sources */,
+				E1EF8DB22DB7736000283627 /* NavigationStackManager.swift in Sources */,
 				E160D0552D89985500CF27EA /* BottombarButtonView.swift in Sources */,
 				AE114C0F2D888B8200B1F665 /* AllHabits+CoreDataClass.swift in Sources */,
 				AE114C102D888B8200B1F665 /* AllHabits+CoreDataProperties.swift in Sources */,
 				AE114C112D888B8200B1F665 /* DailyHabits+CoreDataClass.swift in Sources */,
 				E1ECA2BB2DA3E4FE00231DDA /* deleteView-ViewModel.swift in Sources */,
+				E1EF8DB42DB7753D00283627 /* NavigationContainerView.swift in Sources */,
 				E1ECA2B92DA3E4E400231DDA /* deleteView.swift in Sources */,
 				E160D0532D8991FB00CF27EA /* BottomBarView.swift in Sources */,
 				AEEBB9422D9BFEEB0086DA58 /* ProgressBarView.swift in Sources */,

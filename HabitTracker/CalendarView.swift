@@ -5,87 +5,76 @@ struct CalendarView: View {
     @Environment(\.managedObjectContext) private var moc
     @FetchRequest(entity: DailyHabits.entity(), sortDescriptors: []) private var dailyHabits: FetchedResults<DailyHabits>
     
+    @EnvironmentObject var navManager: NavigationStackManager
+    
     @State private var currentWeekStart: Date = Calendar.current.date(byAdding: .day, value: -6, to: Date()) ?? Date()
-    @State private var selectedDay: Date? = nil  // Track the active day
 
     var body: some View {
         VStack {
-            if selectedDay == nil {
-                HStack {
-                    let localDate = Date()
-                    let localWeekStart = Calendar.current.date(byAdding: .day, value: -6, to: localDate) ?? localDate
-                    
-                    Button(action: { currentWeekStart = localWeekStart }) {
-                        Text("Present")
-                            .font(.headline)
-                            .padding(8)
-                            .background(Color.white)
-                            .cornerRadius(8)
-                    }
-                    
-                    Button(action: {
-                        currentWeekStart = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: currentWeekStart) ?? currentWeekStart
-                    }) {
-                        Image(systemName: "chevron.left")
-                    }
-                    
-                    Text(currentWeekStart.formatAsWeekRange())
+            HStack {
+                let localDate = Date()
+                let localWeekStart = Calendar.current.date(byAdding: .day, value: -6, to: localDate) ?? localDate
+
+                Button(action: { currentWeekStart = localWeekStart }) {
+                    Text("Present")
                         .font(.headline)
-                    
-                    
-                    let isAtPresentOrFuture = currentWeekStart >= (Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date())
-                    
-                    if !isAtPresentOrFuture {
+                        .padding(8)
+                        .background(Color.white)
+                        .cornerRadius(8)
+                }
+
+                Button(action: {
+                    currentWeekStart = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: currentWeekStart) ?? currentWeekStart
+                }) {
+                    Image(systemName: "chevron.left")
+                }
+
+                Text(currentWeekStart.formatAsWeekRange())
+                    .font(.headline)
+
+                let isAtPresentOrFuture = currentWeekStart >= (Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date())
+
+                if !isAtPresentOrFuture {
+                    Button(action: {
+                        currentWeekStart = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: currentWeekStart) ?? currentWeekStart
+                    }) {
+                        Image(systemName: "chevron.right")
+                    }
+                }
+            }
+            .padding()
+
+            GeometryReader { geometry in
+                VStack(spacing: 0) {
+                    Spacer(minLength: 0)
+
+                    ForEach(0..<7, id: \.self) { offset in
+                        let day = Calendar.current.date(byAdding: .day, value: offset, to: currentWeekStart)!
+                        let habitsForDay = dailyHabits.filter { $0.date?.isSameDay(as: day) ?? false }
+                        let totalHabits = habitsForDay.count
+                        let completedHabits = habitsForDay.filter { $0.isCompleted }.count
+
                         Button(action: {
-                            currentWeekStart = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: currentWeekStart) ?? currentWeekStart
+                            navManager.push(DailyHabitView(currentDate: day))
                         }) {
-                            Image(systemName: "chevron.right")
+                            HStack {
+                                Text("\(day.formatAsDayOfWeek()) \(day.formatAsDayNumber())")
+                                    .font(.headline)
+                                    .foregroundColor(Color("grey"))
+                                    .frame(width: geometry.size.width * 0.25,
+                                           alignment: .leading)
+
+                                ProgressBarView(moc: moc, totalHabits: totalHabits, completedHabits: completedHabits)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                            .frame(height: geometry.size.height / 7)
                         }
                     }
+
+                    Spacer(minLength: 0)
                 }
-                .padding()
             }
-            
-            NavigationView {
-                GeometryReader { geometry in
-                    VStack(spacing: 0) {
-                        Spacer(minLength: 0)
-
-                        ForEach(0..<7, id: \.self) { offset in
-                            let day = Calendar.current.date(byAdding: .day, value: offset, to: currentWeekStart)!
-                            let habitsForDay = dailyHabits.filter { $0.date?.isSameDay(as: day) ?? false }
-                            let totalHabits = habitsForDay.count
-                            let completedHabits = habitsForDay.filter { $0.isCompleted }.count
-
-                            NavigationLink(
-                                tag: day,
-                                selection: $selectedDay,
-                                destination: {
-                                    DailyHabitView(currentDate: day)
-                                        .navigationBarHidden(true)
-                                },
-                                label: {
-                                    HStack {
-                                        Text("\(day.formatAsDayOfWeek()) \(day.formatAsDayNumber())")
-                                            .font(.headline)
-                                            .foregroundColor(Color("grey"))
-                                            .frame(width: geometry.size.width * 0.25,
-                                                   alignment: .leading)
-
-                                        
-                                        ProgressBarView(moc: moc, totalHabits: totalHabits, completedHabits: completedHabits)
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                    }
-                                    .frame(height: geometry.size.height / 7)
-                                }
-                            )
-                        }
-
-                        Spacer(minLength: 0)
-                    }
-                }
-                .ignoresSafeArea(edges: [.top, .bottom])
-            }
+            .ignoresSafeArea(edges: [.top, .bottom])
             .padding()
         }
     }

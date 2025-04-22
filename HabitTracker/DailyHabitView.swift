@@ -2,7 +2,9 @@ import SwiftUI
 import CoreData
 
 struct DailyHabitView: View {
-    @Environment(\.presentationMode) var presentationMode  // For back button
+    
+    //@Environment(\.presentationMode) var presentationMode  // For back button
+    @EnvironmentObject var navManager: NavigationStackManager
     
     let currentDate: Date
     
@@ -28,7 +30,7 @@ struct DailyHabitView: View {
     var body: some View {
         VStack {
             HStack {
-                Button(action: { presentationMode.wrappedValue.dismiss() }) {
+                Button(action: { navManager.pop() }) {
                     Image(systemName: "chevron.left")
                         .foregroundColor(.black)
                         .font(.title2)

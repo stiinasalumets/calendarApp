@@ -2,7 +2,7 @@ import SwiftUI
 import CoreData
 
 struct HabitDetailView: View {
-    @Environment(\.presentationMode) var presentationMode  // For back button
+    @EnvironmentObject var navManager: NavigationStackManager
     
     var habit: AllHabits
     var habitID: NSManagedObjectID
@@ -25,51 +25,62 @@ struct HabitDetailView: View {
     
     
     var body: some View {
-        VStack{
-            HStack{
-                Button(action: { presentationMode.wrappedValue.dismiss() }) {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.black)
-                        .font(.title2)
-                }
-                
-                Spacer()
-                
-                Text(habit.title ?? "Unknown")
-                
-                Spacer()
-            }.padding(.vertical)
-            
-        }
-        
         VStack {
-            
-            if let intervalString = habit.interval {
-                let intervalDays = intervalString.components(separatedBy: ",")
+            VStack{
+                HStack{
+                    Button(action: { navManager.pop() }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.black)
+                            .font(.title2)
+                    }
+                    .padding(.leading)
+                    
+                    Spacer()
+                    
+                    Text(habit.title ?? "Unknown")
+                    
+                    Spacer()
+                }.padding(.vertical)
                 
-                List(intervalDays, id: \.self) { day in
-                    Text(day)
+            }
+            
+            VStack {
+                
+                if let intervalString = habit.interval {
+                    let intervalDays = intervalString.components(separatedBy: ",")
+                    
+                    List(intervalDays, id: \.self) { day in
+                        Text(day)
+                    }
                 }
+                
             }
             
+            HStack {
+                let title = habit.title ?? ""
+                
+                Button(action: {
+                    navManager.push(
+                        EditView(selectedTab: $selectedTab, moc: moc, title: title, selectedDays: selectedDays, habitID: habitID
+                                )
+                    )
+                }) {
+                    Text("Edit")
+                }
+                
+                Spacer()
+                
+                Button(action: {
+                    navManager.push(deleteView(selectedTab: $selectedTab, moc: moc, habitID: habitID, title: title))
+                }) {
+                    Text("Delete")
+                }
+                
+                
+                
+                
+            }.padding()
         }
-        
-        HStack {
-            let title = habit.title ?? ""
-            
-            NavigationLink(destination: EditView(selectedTab: $selectedTab, moc: moc, title: title, selectedDays: selectedDays, habitID: habitID )) {
-                Text("Edit")
-            }
-            
-            Spacer()
-            
-            NavigationLink(destination: deleteView(selectedTab: $selectedTab, moc: moc, habitID: habitID, title: title)) {
-                Text("Delete")
-            }
-            
-            
-        }.padding()
-        
         
     }
 }
