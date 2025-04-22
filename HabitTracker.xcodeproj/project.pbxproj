@@ -41,6 +41,7 @@
 		E1ECA2C32DAA462600231DDA /* SettingView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECA2C22DAA462600231DDA /* SettingView-ViewModel.swift */; };
 		E1EF8DB22DB7736000283627 /* NavigationStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DB12DB7736000283627 /* NavigationStackManager.swift */; };
 		E1EF8DB42DB7753D00283627 /* NavigationContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DB32DB7753D00283627 /* NavigationContainerView.swift */; };
+		E1EF8DB62DB7816F00283627 /* ThemeColorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DB52DB7816F00283627 /* ThemeColorController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		E1ECA2C22DAA462600231DDA /* SettingView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingView-ViewModel.swift"; sourceTree = "<group>"; };
 		E1EF8DB12DB7736000283627 /* NavigationStackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationStackManager.swift; sourceTree = "<group>"; };
 		E1EF8DB32DB7753D00283627 /* NavigationContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationContainerView.swift; sourceTree = "<group>"; };
+		E1EF8DB52DB7816F00283627 /* ThemeColorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColorController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				AEEBB93C2D9BE8120086DA58 /* addView-ViewModel.swift */,
 				AEEBB9412D9BFEEB0086DA58 /* ProgressBarView.swift */,
 				AEEBB9432D9C00F20086DA58 /* ProgressBarView-ViewModel.swift */,
+				E1EF8DB52DB7816F00283627 /* ThemeColorController.swift */,
 			);
 			path = HabitTracker;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				AE114C112D888B8200B1F665 /* DailyHabits+CoreDataClass.swift in Sources */,
 				E1ECA2BB2DA3E4FE00231DDA /* deleteView-ViewModel.swift in Sources */,
 				E1EF8DB42DB7753D00283627 /* NavigationContainerView.swift in Sources */,
+				E1EF8DB62DB7816F00283627 /* ThemeColorController.swift in Sources */,
 				E1ECA2B92DA3E4E400231DDA /* deleteView.swift in Sources */,
 				E160D0532D8991FB00CF27EA /* BottomBarView.swift in Sources */,
 				AEEBB9422D9BFEEB0086DA58 /* ProgressBarView.swift in Sources */,

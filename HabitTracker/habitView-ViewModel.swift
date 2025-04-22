@@ -6,6 +6,10 @@ extension habitView {
     class ViewModel: ObservableObject {
             @Published var allHabits: [AllHabits] = []  
             var moc: NSManagedObjectContext
+        
+            let colorController = ThemeColorController()
+            
+            var prevColor: String = ""
             
             init(moc: NSManagedObjectContext) {
                 self.moc = moc
@@ -22,6 +26,18 @@ extension habitView {
                 } catch {
                     print("Failed to fetch habits: \(error)")
                 }
+            }
+            
+        
+        
+            func chooseListColor() -> String {
+                print("prevColor: \(prevColor)")
+                let color = colorController.randomColorInList(prevColor: prevColor)
+                //let color = colorController.randomColor()
+                print("color: \(color)")
+                prevColor = color
+                
+                return color
             }
         }
 }
