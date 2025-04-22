@@ -50,14 +50,12 @@ struct HabitDetailView: View {
                 List(intervalDays, id: \.self) { day in
                     Text(day)
                 }
-                
-                
             }
             
         }
         
         HStack {
-            var title = habit.title ?? ""
+            let title = habit.title ?? ""
             
             NavigationLink(destination: EditView(selectedTab: $selectedTab, moc: moc, title: title, selectedDays: selectedDays, habitID: habitID )) {
                 Text("Edit")
