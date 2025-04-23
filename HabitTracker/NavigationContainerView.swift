@@ -23,7 +23,7 @@ struct NavigationContainerView: View {
                             }
                             
                             if selectedTab == .statistics {
-                                Text("Statistics")
+                                StatisticsView(moc: moc)
                             }
                             
                             if selectedTab == .settings {
