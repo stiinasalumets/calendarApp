@@ -44,6 +44,7 @@
 		E1EF8DB62DB7816F00283627 /* ThemeColorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DB52DB7816F00283627 /* ThemeColorController.swift */; };
 		E1EF8DB82DB7946D00283627 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DB72DB7946D00283627 /* StatisticsView.swift */; };
 		E1EF8DBA2DB7947F00283627 /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DB92DB7947F00283627 /* StatisticsViewModel.swift */; };
+		E1EF8DBC2DB9028900283627 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DBB2DB9028900283627 /* LocalNotificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		E1EF8DB52DB7816F00283627 /* ThemeColorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColorController.swift; sourceTree = "<group>"; };
 		E1EF8DB72DB7946D00283627 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		E1EF8DB92DB7947F00283627 /* StatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModel.swift; sourceTree = "<group>"; };
+		E1EF8DBB2DB9028900283627 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 				AEEBB9412D9BFEEB0086DA58 /* ProgressBarView.swift */,
 				AEEBB9432D9C00F20086DA58 /* ProgressBarView-ViewModel.swift */,
 				E1EF8DB52DB7816F00283627 /* ThemeColorController.swift */,
+				E1EF8DBB2DB9028900283627 /* LocalNotificationManager.swift */,
 			);
 			path = HabitTracker;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				E1EF8DB22DB7736000283627 /* NavigationStackManager.swift in Sources */,
 				E160D0552D89985500CF27EA /* BottombarButtonView.swift in Sources */,
 				AE114C0F2D888B8200B1F665 /* AllHabits+CoreDataClass.swift in Sources */,
+				E1EF8DBC2DB9028900283627 /* LocalNotificationManager.swift in Sources */,
 				E1EF8DBA2DB7947F00283627 /* StatisticsViewModel.swift in Sources */,
 				AE114C102D888B8200B1F665 /* AllHabits+CoreDataProperties.swift in Sources */,
 				AE114C112D888B8200B1F665 /* DailyHabits+CoreDataClass.swift in Sources */,
