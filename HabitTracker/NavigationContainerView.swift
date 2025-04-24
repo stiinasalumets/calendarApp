@@ -3,8 +3,10 @@ import SwiftUI
 
 struct NavigationContainerView: View {
     @EnvironmentObject var navManager: NavigationStackManager
+    @EnvironmentObject var lnManager: LocalNotificationManager
     @State var selectedTab: BottomBarTabs = .calendar
     @Environment(\.managedObjectContext) private var moc
+    
 
     var body: some View {
         ZStack {
@@ -27,13 +29,15 @@ struct NavigationContainerView: View {
                             }
                             
                             if selectedTab == .settings {
-                                SettingView(moc: moc)
+                                SettingView(moc: moc, lnManager: lnManager)
                                 
                             }
                         }
                     } else {
                         navManager.stack.last
                     }
+                }.task {
+                    try? await lnManager.requestAuthorization()
                 }
         
         
@@ -41,6 +45,7 @@ struct NavigationContainerView: View {
             Spacer()
             BottomBarView(selectedTab: $selectedTab)
         }
+    
     }
     
 
