@@ -15,10 +15,31 @@ extension StatisticsView {
         }
         
         func calculateStreak() -> Int {
+            
+            let calendar = Calendar.current
+            var currentDate = calendar.date(byAdding: .day, value: -1, to: Date())!
+            
             var result = 0
             
+            var counting = true
+            while (counting) {
+                var habitCount = fetchDailyHabitsCountOnDate(date: currentDate)
+                var habitCountCompleted = fetchCompletedDailyHabitsCountOnDate(date: currentDate)
+                
+                print("habitCount: \(String(habitCount))")
+                print("habitCountCompleted: \(String(habitCountCompleted))")
+                
+                if (habitCount == habitCountCompleted) {
+                    result = result+1
+                    currentDate = calendar.date(byAdding: .day, value: -1, to: currentDate)!
+                } else {
+                    counting = false
+                }
+            }
             return result
         }
+        
+        
         
         func calculateDailyHabitCompletionPercentage() -> [AllHabits: Int] {
             var result: [AllHabits: Int] = [:]
@@ -51,6 +72,43 @@ extension StatisticsView {
             }
         }
         
+        
+        func fetchDailyHabitsCountOnDate(date: Date) -> Int {
+            let request: NSFetchRequest<DailyHabits> = DailyHabits.fetchRequest()
+            
+            let calendar = Calendar.current
+            let startOfDay = calendar.startOfDay(for: date)
+            let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
+            
+            request.predicate = NSPredicate(format: "date >= %@ AND date < %@", startOfDay as NSDate, endOfDay as NSDate)
+            
+            do {
+                let count = try moc.count(for: request)
+                return count
+            } catch {
+                print("Failed to count DailyHabits for streek: \(error)")
+                return 0
+            }
+        }
+        
+        func fetchCompletedDailyHabitsCountOnDate(date: Date) -> Int {
+            let request: NSFetchRequest<DailyHabits> = DailyHabits.fetchRequest()
+            
+            let calendar = Calendar.current
+            let startOfDay = calendar.startOfDay(for: date)
+            let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
+            
+            request.predicate = NSPredicate(format: "date >= %@ AND date < %@ AND isCompleted == YES", startOfDay as NSDate, endOfDay as NSDate)
+            
+            do {
+                let count = try moc.count(for: request)
+                return count
+            } catch {
+                print("Failed to count DailyHabits for streek: \(error)")
+                return 0
+            }
+        }
+        
         func fetchDailyHabitCount(for habit: AllHabits) -> Int {
             let request: NSFetchRequest<DailyHabits> = DailyHabits.fetchRequest()
             request.predicate = NSPredicate(format: "habit == %@", habit)
@@ -67,7 +125,6 @@ extension StatisticsView {
         func fetchDailyHabitCompletedCount(for habit: AllHabits) -> Int {
             let request: NSFetchRequest<DailyHabits> = DailyHabits.fetchRequest()
             
-            // Match both the habit relationship and the isCompleted flag
             request.predicate = NSPredicate(format: "habit == %@ AND isCompleted == YES", habit)
             
             do {
@@ -86,21 +143,6 @@ extension StatisticsView {
         }
         
         
-        
-        
-        
-        func deleteAllHabits(context: NSManagedObjectContext) {
-            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Settings.fetchRequest()
-            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
-            do {
-                try context.execute(deleteRequest)
-                try context.save()
-                print("✅ All habits deleted.")
-            } catch {
-                print("❌ Failed to delete all habits: \(error)")
-            }
-        }
         
         
     }
