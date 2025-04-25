@@ -22,10 +22,17 @@ struct HabitForm: View {
     
     
     
+    
+    
     var body: some View {
         Form {
             Section(header: Text("Habit Details")) {
                 TextField("Title", text: $title)
+                    .onChange(of: title) { newValue in
+                                    if newValue.count > 16 {
+                                        title = String(newValue.prefix(16))
+                                    }
+                                }
             }
 
             Section(header: Text("Select Days")) {

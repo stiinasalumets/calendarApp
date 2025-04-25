@@ -27,20 +27,24 @@ struct HabitDetailView: View {
     var body: some View {
         VStack {
             VStack{
-                HStack{
+                HStack {
                     Button(action: { navManager.pop() }) {
                         Image(systemName: "chevron.left")
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("grey"))
                             .font(.title2)
                     }
-                    .padding(.leading)
-                    
+                    .padding([.leading, .top])
+
                     Spacer()
-                    
+                }
+                .overlay(
                     Text(habit.title ?? "Unknown")
-                    
-                    Spacer()
-                }.padding(.vertical)
+                        .font(.largeTitle)
+                        .foregroundColor(Color("grey"))
+                        .padding(.top),
+                    alignment: .center
+                )
+                .padding(.vertical)
                 
             }
             
@@ -60,20 +64,34 @@ struct HabitDetailView: View {
                 let title = habit.title ?? ""
                 
                 Button(action: {
-                    navManager.push(
-                        EditView(selectedTab: $selectedTab, moc: moc, title: title, selectedDays: selectedDays, habitID: habitID
-                                )
-                    )
+                    navManager.push(deleteView(selectedTab: $selectedTab, moc: moc, habitID: habitID, title: title))
                 }) {
-                    Text("Edit")
+                    HStack {
+                        Text("Delete")
+                            .foregroundColor(Color("grey"))
+                            .font(.body)
+                        Image(systemName: "trash")
+                            .foregroundColor(Color("grey"))
+                            .font(.body)
+                    }
                 }
                 
                 Spacer()
                 
                 Button(action: {
-                    navManager.push(deleteView(selectedTab: $selectedTab, moc: moc, habitID: habitID, title: title))
+                    navManager.push(
+                        EditView(selectedTab: $selectedTab, moc: moc, title: title, selectedDays: selectedDays, habitID: habitID
+                                )
+                    )
                 }) {
-                    Text("Delete")
+                    HStack {
+                        Text("Edit")
+                            .foregroundColor(Color("grey"))
+                            .font(.body)
+                        Image(systemName: "pencil")
+                            .foregroundColor(Color("grey"))
+                            .font(.body)
+                    }
                 }
                 
                 

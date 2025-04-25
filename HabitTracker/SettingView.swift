@@ -23,6 +23,7 @@ struct SettingView: View {
             Text("Settings")
                 .font(.largeTitle)
                 .padding(.top)
+                .foregroundColor(Color("grey"))
             
             List {
                 Section(header: Text("Animal Preference")) {

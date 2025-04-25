@@ -16,6 +16,7 @@ struct StatisticsView: View {
             VStack {
                 Text("Statistics")
                     .font(.largeTitle)
+                    .foregroundColor(Color("grey"))
                     .padding(.top)
                 
             }
@@ -32,15 +33,30 @@ struct StatisticsView: View {
             .padding(.vertical, 8)
             
             List {
-                ForEach(viewModel.habitStats.sorted(by: { $0.key.title ?? "" < $1.key.title ?? "" }), id: \.key) { habit, percentage in
-                    HStack {
-                        Text(habit.title ?? "Unnamed Habit")
-                        Spacer()
-                        Text("\(percentage)%")
-                            .foregroundStyle(.secondary)
+                Section(header: Text("Current habits")) {
+                    ForEach(viewModel.habitStatsActive.sorted(by: { $0.key.title ?? "" < $1.key.title ?? "" }), id: \.key) { habit, percentage in
+                        HStack {
+                            Text(habit.title ?? "Unnamed Habit")
+                            Spacer()
+                            Text("\(percentage)%")
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+                
+                Section(header: Text("Former Habits")) {
+                    ForEach(viewModel.habitStats.sorted(by: { $0.key.title ?? "" < $1.key.title ?? "" }), id: \.key) { habit, percentage in
+                        HStack {
+                            Text(habit.title ?? "Unnamed Habit")
+                            Spacer()
+                            Text("\(percentage)%")
+                                .foregroundStyle(.secondary)
+                        }
                     }
                 }
             }
+            
+            
             
         }
     }
