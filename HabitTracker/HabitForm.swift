@@ -2,6 +2,7 @@ import SwiftUI
 import CoreData
 
 struct HabitForm: View {
+    @EnvironmentObject var navManager: NavigationStackManager
     //@State private var title: String = ""
     //@State private var selectedDays: Set<String> = []
     @State private var title: String
@@ -19,10 +20,6 @@ struct HabitForm: View {
         self._habitID = State(initialValue: habitID)
         print("Form: title: \(State(initialValue: title)), selectedDays: \(State(initialValue: selectedDays))")
     }
-    
-    
-    
-    
     
     var body: some View {
         Form {
@@ -54,17 +51,19 @@ struct HabitForm: View {
             }
 
             Section {
-                Button("Add Habit") {
+                Button("Save") {
                     if ((habitID) != nil) {
                         if let id = habitID {
                             viewModel.updateHabit(title: title, selectedDays: selectedDays, habitID: id)
                         } else {
                             print("❌ No habitID available to update")
                         }
+                        navManager.pop()
                     } else {
                         viewModel.addHabit(title: title, selectedDays: selectedDays)
+                        
+                        selectedTab = .habit
                     }
-                    selectedTab = .habit
                 }
                 .disabled(title.isEmpty || selectedDays.isEmpty)
             }
