@@ -22,7 +22,13 @@ struct habitView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Text("Habits")
+            VStack {
+                Text("Habits")
+                    .font(.largeTitle)
+                    .padding([.top, .bottom])
+                    .foregroundColor(Color("grey"))
+                
+            }
             
             GeometryReader { geometry in
                 ScrollView {

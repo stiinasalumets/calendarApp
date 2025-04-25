@@ -13,9 +13,11 @@ struct HabitViewCard: View {
             HStack() {
                     Text(title)
                     .padding()
+                    .foregroundColor(Color("grey"))
                     Spacer()
                     Image(systemName: "chevron.right")
                     .padding(.trailing, 10)
+                    .foregroundColor(Color("grey"))
                 }
         }
         .background(Color(color))

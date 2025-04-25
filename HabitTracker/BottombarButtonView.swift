@@ -14,7 +14,8 @@ struct BottombarButtonView: View {
                 Image(image)
                     .resizable()
                     .frame(width: 24, height: 24)
-                    //.colorInvert(isActive ? .purple : .gray)
+                    .foregroundColor(isActive ?  .purple : Color("grey"))
+                    
             }
             
         }

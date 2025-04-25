@@ -6,11 +6,13 @@ extension StatisticsView {
         
         private var moc: NSManagedObjectContext
         @Published var habitStats: [AllHabits: Int] = [:]
+        @Published var habitStatsActive: [AllHabits: Int] = [:]
         @Published var habitStreak: Int = 0
         
         init(moc: NSManagedObjectContext) {
             self.moc = moc
-            habitStats = calculateDailyHabitCompletionPercentage()
+            habitStats = calculateDailyHabitCompletionPercentage(isActive: false)
+            habitStatsActive = calculateDailyHabitCompletionPercentage(isActive: true)
             habitStreak = calculateStreak()
         }
         
@@ -41,10 +43,10 @@ extension StatisticsView {
         
         
         
-        func calculateDailyHabitCompletionPercentage() -> [AllHabits: Int] {
+        func calculateDailyHabitCompletionPercentage(isActive: Bool) -> [AllHabits: Int] {
             var result: [AllHabits: Int] = [:]
             
-            var allHabits = fetchAllHabits()
+            var allHabits = fetchAllHabits(isActive: isActive)
 
             for habit in allHabits {
                 let count = fetchDailyHabitCount(for: habit)
@@ -59,9 +61,13 @@ extension StatisticsView {
             return result
         }
         
-        func fetchAllHabits() -> [AllHabits] {
+        
+        
+        func fetchAllHabits(isActive: Bool) -> [AllHabits] {
             let request: NSFetchRequest<AllHabits> = AllHabits.fetchRequest()
             request.sortDescriptors = []
+            request.predicate = NSPredicate(format: "isActive == %@", NSNumber(value: isActive))
+            
             do {
                 let allHabits = try moc.fetch(request)
                 return allHabits
