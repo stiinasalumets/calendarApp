@@ -9,6 +9,7 @@ struct HabitDetailView: View {
     var moc: NSManagedObjectContext
     @Binding var selectedTab: BottomBarTabs
     @State private var selectedDays: Set<String> = []
+    @State private var sortedDays: [String] = []
     
     init(habit: AllHabits, habitID: NSManagedObjectID, selectedTab: Binding<BottomBarTabs>, moc: NSManagedObjectContext) {
         self.habit = habit
@@ -16,12 +17,7 @@ struct HabitDetailView: View {
         self.moc = moc
         self._selectedTab = selectedTab
         
-        if let intervalString = habit.interval {
-                    let intervalDaysArray = intervalString.components(separatedBy: ",")
-                    self._selectedDays = State(initialValue: Set(intervalDaysArray.map { $0.trimmingCharacters(in: .whitespaces) }))
-                }
     }
-    
     
     
     var body: some View {
@@ -49,17 +45,12 @@ struct HabitDetailView: View {
             }
             
             VStack {
-                
-                if let intervalString = habit.interval {
-                    let intervalDays = intervalString.components(separatedBy: ",")
-                    
-                    List(intervalDays, id: \.self) { day in
-                        Text(day)
-                    }
+                List(Array(selectedDays), id: \.self) { day in
+                    Text(day)
                 }
                 
             }
-            
+                
             HStack {
                 let title = habit.title ?? ""
                 
@@ -93,12 +84,29 @@ struct HabitDetailView: View {
                             .font(.body)
                     }
                 }
-                
-                
-                
-                
             }.padding()
+        }.onAppear {
+            createWeekdaysArray(intervalString: habit.interval ?? "")
         }
-        
+    }
+    
+    func createWeekdaysArray(intervalString: String) {
+        let intervalDaysArray = intervalString
+            .components(separatedBy: ",")
+            .map { $0.trimmingCharacters(in: .whitespaces) }
+
+        let weekDaysOrder = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+        let sorted = intervalDaysArray.sorted {
+            guard let firstIndex = weekDaysOrder.firstIndex(of: $0),
+                  let secondIndex = weekDaysOrder.firstIndex(of: $1) else {
+                return false
+            }
+            return firstIndex < secondIndex
+        }
+
+        selectedDays = Set(sorted)
+        sortedDays = sorted
     }
 }
+

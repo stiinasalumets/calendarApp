@@ -5,7 +5,6 @@ class ThemeColorController {
     func randomColorInList(prevColor: String) -> String {
         var newColor = false
         while (!newColor) {
-            print("randomColorInList loop")
             var color = randomColor()
             
             if (color != prevColor) {
