@@ -84,9 +84,11 @@ struct BottomBarView: View {
         }
         .frame(height: 90)
         .background(Color("purple"))
+        
 
         .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 0)
     }
+    
 }
 
 struct BottomBar_Previews: PreviewProvider {

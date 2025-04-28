@@ -5,9 +5,12 @@ extension StatisticsView {
     class ViewModel: ObservableObject {
         
         private var moc: NSManagedObjectContext
-        @Published var habitStats: [AllHabits: Int] = [:]
-        @Published var habitStatsActive: [AllHabits: Int] = [:]
+        @Published var habitStats: [AllHabits: Double] = [:]
+        @Published var habitStatsActive: [AllHabits: Double] = [:]
         @Published var habitStreak: Int = 0
+        
+        let colorController = ThemeColorController()
+        var prevColor: String = ""
         
         init(moc: NSManagedObjectContext) {
             self.moc = moc
@@ -25,13 +28,13 @@ extension StatisticsView {
             
             var counting = true
             while (counting) {
-                var habitCount = fetchDailyHabitsCountOnDate(date: currentDate)
-                var habitCountCompleted = fetchCompletedDailyHabitsCountOnDate(date: currentDate)
+                let habitCount = fetchDailyHabitsCountOnDate(date: currentDate)
+                let habitCountCompleted = fetchCompletedDailyHabitsCountOnDate(date: currentDate)
                 
                 print("habitCount: \(String(habitCount))")
                 print("habitCountCompleted: \(String(habitCountCompleted))")
                 
-                if (habitCount == habitCountCompleted) {
+                if (habitCount == habitCountCompleted && habitCountCompleted != 0) {
                     result = result+1
                     currentDate = calendar.date(byAdding: .day, value: -1, to: currentDate)!
                 } else {
@@ -43,10 +46,10 @@ extension StatisticsView {
         
         
         
-        func calculateDailyHabitCompletionPercentage(isActive: Bool) -> [AllHabits: Int] {
-            var result: [AllHabits: Int] = [:]
+        func calculateDailyHabitCompletionPercentage(isActive: Bool) -> [AllHabits: Double] {
+            var result: [AllHabits: Double] = [:]
             
-            var allHabits = fetchAllHabits(isActive: isActive)
+            let allHabits = fetchAllHabits(isActive: isActive)
 
             for habit in allHabits {
                 let count = fetchDailyHabitCount(for: habit)
@@ -54,7 +57,6 @@ extension StatisticsView {
                 
                 let percentage = calculateCompletionPercentage(completed: completedCount, total: count)
                 
-                print("habit: \(habit.title), %: \(percentage)")
                 result[habit] = percentage
             }
 
@@ -142,13 +144,19 @@ extension StatisticsView {
             }
         }
         
-        func calculateCompletionPercentage(completed: Int, total: Int) -> Int {
+        func calculateCompletionPercentage(completed: Int, total: Int) -> Double {
             guard total > 0 else { return 0 }
             let percentage = (Double(completed) / Double(total)) * 100
-            return Int(percentage.rounded())
+            return percentage
         }
         
-        
+        func chooseListColor() -> String {
+            let color = colorController.randomColorInList(prevColor: prevColor)
+            
+            prevColor = color
+            
+            return color
+        }
         
         
     }

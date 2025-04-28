@@ -8,7 +8,6 @@ extension habitView {
             var moc: NSManagedObjectContext
         
             let colorController = ThemeColorController()
-            
             var prevColor: String = ""
             
             init(moc: NSManagedObjectContext) {
