@@ -45,7 +45,7 @@ struct HabitDetailView: View {
             }
             
             VStack {
-                List(Array(selectedDays), id: \.self) { day in
+                List(Array(sortedDays), id: \.self) { day in
                     Text(day)
                 }
                 
