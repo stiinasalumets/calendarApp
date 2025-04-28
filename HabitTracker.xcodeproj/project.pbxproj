@@ -46,6 +46,7 @@
 		E1EF8DBA2DB7947F00283627 /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DB92DB7947F00283627 /* StatisticsViewModel.swift */; };
 		E1EF8DBC2DB9028900283627 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DBB2DB9028900283627 /* LocalNotificationManager.swift */; };
 		E1EF8DBE2DBF99C300283627 /* DonutChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DBD2DBF99C200283627 /* DonutChartView.swift */; };
+		E1EF8DC82DC007EE00283627 /* keyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DC72DC007EE00283627 /* keyboardObserver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +92,7 @@
 		E1EF8DBB2DB9028900283627 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		E1EF8DBD2DBF99C200283627 /* DonutChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutChartView.swift; sourceTree = "<group>"; };
 		E1EF8DC52DBF9F2700283627 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.2.sdk/System/Library/Frameworks/Charts.framework; sourceTree = DEVELOPER_DIR; };
+		E1EF8DC72DC007EE00283627 /* keyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keyboardObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 				E1EF8DB52DB7816F00283627 /* ThemeColorController.swift */,
 				E1EF8DBB2DB9028900283627 /* LocalNotificationManager.swift */,
 				E1EF8DBD2DBF99C200283627 /* DonutChartView.swift */,
+				E1EF8DC72DC007EE00283627 /* keyboardObserver.swift */,
 			);
 			path = HabitTracker;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				E1EF8DBC2DB9028900283627 /* LocalNotificationManager.swift in Sources */,
 				E1EF8DBA2DB7947F00283627 /* StatisticsViewModel.swift in Sources */,
 				AE114C102D888B8200B1F665 /* AllHabits+CoreDataProperties.swift in Sources */,
+				E1EF8DC82DC007EE00283627 /* keyboardObserver.swift in Sources */,
 				AE114C112D888B8200B1F665 /* DailyHabits+CoreDataClass.swift in Sources */,
 				E1ECA2BB2DA3E4FE00231DDA /* deleteView-ViewModel.swift in Sources */,
 				E1EF8DB42DB7753D00283627 /* NavigationContainerView.swift in Sources */,
