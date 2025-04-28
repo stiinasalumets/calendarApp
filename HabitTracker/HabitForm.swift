@@ -26,12 +26,12 @@ struct HabitForm: View {
             Section(header: Text("Habit Details")) {
                 TextField("Title", text: $title)
                     .onChange(of: title) { newValue in
-                                    if newValue.count > 16 {
-                                        title = String(newValue.prefix(16))
-                                    }
-                                }
+                        if newValue.count > 16 {
+                            title = String(newValue.prefix(16))
+                        }
+                    }
             }
-
+            
             Section(header: Text("Select Days")) {
                 ForEach(daysOfWeek, id: \.self) { day in
                     HStack {
@@ -49,7 +49,7 @@ struct HabitForm: View {
                     .contentShape(Rectangle())
                 }
             }
-
+            
             Section {
                 Button("Save") {
                     if ((habitID) != nil) {
@@ -69,7 +69,18 @@ struct HabitForm: View {
             }
         }
         .navigationTitle("Add Habit")
+        .onTapGesture {
+            self.hideKeyboard()
+        }
+        
+        
     }
-
     
+}
+
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
+                                         to: nil, from: nil, for: nil)
+    }
 }
