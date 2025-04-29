@@ -12,7 +12,6 @@ class ThemeColorController {
                 return color
             }
         }
-        
     }
     
     func randomColor() -> String {
@@ -38,6 +37,4 @@ class ThemeColorController {
             return "purple"
         }
     }
-    
-
 }

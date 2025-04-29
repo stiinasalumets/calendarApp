@@ -12,12 +12,7 @@ struct ContentView: View {
             .environmentObject(lnManager)
             .environmentObject(navManager)
             .environmentObject(keyboardObserver)
-            
-            
     }
-    
-    
-    
     
     
     struct ContentView_Previews: PreviewProvider {

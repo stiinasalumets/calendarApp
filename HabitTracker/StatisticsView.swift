@@ -20,18 +20,19 @@ struct StatisticsView: View {
                         .font(.largeTitle)
                         .foregroundColor(Color("grey"))
                         .padding(.top)
-                    
                 }
                 
                 VStack(alignment: .center, spacing: 4) {
                     Text("Streak")
                         .font(.system(size: 25, weight: .bold))
-                        .foregroundColor(Color("grey"))
+                        .foregroundStyle(.secondary)
+                        
                     
                     Text("\(viewModel.habitStreak) days")
                         .font(.system(size: 35, weight: .bold))
                         .bold()
-                        .foregroundStyle(.secondary)
+                        .foregroundColor(Color("grey"))
+                        
                 }
                 .padding(.vertical, 8)
                 
@@ -125,7 +126,6 @@ struct StatisticsView: View {
                             }
                         }.padding(.top)
                     }
-                    
                 }
             }
         }

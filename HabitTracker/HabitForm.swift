@@ -72,10 +72,7 @@ struct HabitForm: View {
         .onTapGesture {
             self.hideKeyboard()
         }
-        
-        
     }
-    
 }
 
 extension View {

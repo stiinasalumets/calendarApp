@@ -60,9 +60,6 @@ struct deleteView: View {
                 
                 Spacer()
             }
-            
         }
     }
-
-    
 }

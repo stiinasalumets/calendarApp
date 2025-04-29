@@ -157,7 +157,5 @@ extension StatisticsView {
             
             return color
         }
-        
-        
     }
 }

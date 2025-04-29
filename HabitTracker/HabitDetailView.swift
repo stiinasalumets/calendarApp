@@ -16,9 +16,7 @@ struct HabitDetailView: View {
         self.habitID = habitID
         self.moc = moc
         self._selectedTab = selectedTab
-        
     }
-    
     
     var body: some View {
         VStack {
@@ -30,7 +28,7 @@ struct HabitDetailView: View {
                             .font(.title2)
                     }
                     .padding([.leading, .top])
-
+                    
                     Spacer()
                 }
                 .overlay(
@@ -41,16 +39,14 @@ struct HabitDetailView: View {
                     alignment: .center
                 )
                 .padding(.vertical)
-                
             }
             
             VStack {
                 List(Array(sortedDays), id: \.self) { day in
                     Text(day)
                 }
-                
             }
-                
+            
             HStack {
                 let title = habit.title ?? ""
                 
@@ -94,9 +90,9 @@ struct HabitDetailView: View {
         let intervalDaysArray = intervalString
             .components(separatedBy: ",")
             .map { $0.trimmingCharacters(in: .whitespaces) }
-
+        
         let weekDaysOrder = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-
+        
         let sorted = intervalDaysArray.sorted {
             guard let firstIndex = weekDaysOrder.firstIndex(of: $0),
                   let secondIndex = weekDaysOrder.firstIndex(of: $1) else {
@@ -104,7 +100,7 @@ struct HabitDetailView: View {
             }
             return firstIndex < secondIndex
         }
-
+        
         selectedDays = Set(sorted)
         sortedDays = sorted
     }

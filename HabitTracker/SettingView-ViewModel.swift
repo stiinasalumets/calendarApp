@@ -16,10 +16,7 @@ extension SettingView {
             Task {
                 await lnManager.initializeNotificationsIfNeeded()
             }
-            
         }
-        
-        
         
         func initializeNotificationsIfNeeded()  {
             
@@ -38,8 +35,6 @@ extension SettingView {
                         await lnManager.schedule(localNotification: localNotification)
                     }
                 }
-                
-                
             }
         }
         
@@ -68,7 +63,5 @@ extension SettingView {
                 print("❌ Failed to delete all habits: \(error)")
             }
         }
-        
-        
     }
 }

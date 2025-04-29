@@ -10,6 +10,6 @@ class KeyboardObserver: ObservableObject {
             .merge(with: NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification))
             .sink { notification in
                 self.isKeyboardVisible = (notification.name == UIResponder.keyboardWillShowNotification)
-            }
+        }
     }
 }

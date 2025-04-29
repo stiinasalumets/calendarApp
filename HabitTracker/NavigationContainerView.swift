@@ -31,7 +31,6 @@ struct NavigationContainerView: View {
                     
                     if selectedTab == .settings {
                         SettingView(moc: moc, lnManager: lnManager)
-                        
                     }
                 }
             } else {
@@ -40,8 +39,6 @@ struct NavigationContainerView: View {
         }.task {
             try? await lnManager.requestAuthorization()
         }
-        
-        
         
         Spacer()
         

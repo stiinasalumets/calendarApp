@@ -10,7 +10,7 @@ struct DonutChartView: View {
             ZStack {
                 // Background Circle (Empty part)
                 Circle()
-                    .stroke(Color.gray.opacity(0.2), lineWidth: 20)
+                    .stroke(Color("lightGrey"), lineWidth: 20)
                 
                 // Foreground Circle (Filled part)
                 Circle()
@@ -32,7 +32,7 @@ struct DonutChartView: View {
             // Title Text below the chart
             Text(title)
                 .font(.system(size: 18, weight: .semibold))
-                .foregroundColor(Color.primary)
+                .foregroundColor(Color("grey"))
                 .padding(.top, 10)
         }
     }

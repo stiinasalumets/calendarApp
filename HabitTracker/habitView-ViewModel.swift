@@ -27,8 +27,6 @@ extension habitView {
                 }
             }
             
-        
-        
             func chooseListColor() -> String {
                 let color = colorController.randomColorInList(prevColor: prevColor)
                 
