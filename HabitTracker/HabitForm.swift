@@ -59,6 +59,7 @@ struct HabitForm: View {
                                 Spacer()
                                 Image(systemName: selectedDays.contains(day) ? "checkmark.square.fill" : "square")
                                     .foregroundColor(Color("grey"))
+                                    .accessibilityIdentifier("\(day)Checkbox")
                                     .onTapGesture {
                                         if selectedDays.contains(day) {
                                             selectedDays.remove(day)

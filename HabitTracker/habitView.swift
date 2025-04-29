@@ -41,7 +41,10 @@ struct habitView: View {
                             )
                         }) {
                             HabitViewCard(title: habit.title ?? "Unknown", color: viewModel.chooseListColor())
-                                .padding(.vertical, 0)
+                                .background(
+                                    Color.clear
+                                        .accessibilityIdentifier("HabitCard_\(habit.title ?? "Unknown")")
+                                )
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
