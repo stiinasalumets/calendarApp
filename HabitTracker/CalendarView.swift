@@ -8,6 +8,19 @@ struct CalendarView: View {
     @EnvironmentObject var navManager: NavigationStackManager
     
     @State private var currentWeekStart: Date = Calendar.current.date(byAdding: .day, value: -6, to: Date()) ?? Date()
+    
+    var weekDayColorPairs: [(Date, String)] {
+        var results: [(Date, String)] = []
+        var prevColor = ""
+        
+        for offset in 0..<7 {
+            let day = Calendar.current.date(byAdding: .day, value: offset, to: currentWeekStart)!
+            let newColor = ThemeColorController().randomColorInList(prevColor: prevColor)
+            results.append((day, newColor))
+            prevColor = newColor
+        }
+        return results
+    }
 
     var body: some View {
         VStack {
@@ -48,8 +61,7 @@ struct CalendarView: View {
                 VStack(spacing: 0) {
                     Spacer(minLength: 0)
 
-                    ForEach(0..<7, id: \.self) { offset in
-                        let day = Calendar.current.date(byAdding: .day, value: offset, to: currentWeekStart)!
+                    ForEach(weekDayColorPairs, id: \.0) { day, color in
                         let habitsForDay = dailyHabits.filter { $0.date?.isSameDay(as: day) ?? false }
                         let totalHabits = habitsForDay.count
                         let completedHabits = habitsForDay.filter { $0.isCompleted }.count
@@ -64,7 +76,7 @@ struct CalendarView: View {
                                     .frame(width: geometry.size.width * 0.25,
                                            alignment: .leading)
 
-                                ProgressBarView(moc: moc, totalHabits: totalHabits, completedHabits: completedHabits)
+                                ProgressBarView(moc: moc, totalHabits: totalHabits, completedHabits: completedHabits, color: color)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }
                             .frame(height: geometry.size.height / 7)
@@ -74,6 +86,7 @@ struct CalendarView: View {
                     Spacer(minLength: 0)
                 }
             }
+
             .ignoresSafeArea(edges: [.top, .bottom])
             .padding()
         }

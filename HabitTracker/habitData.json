@@ -26,7 +26,7 @@
     {
         "title": "Write Journal",
         "isActive": true,
-        "interval": "Monday,Tuesday,Wednesday,Thurdsay,Saturday,Sunday",
+        "interval": "Monday,Tuesday,Wednesday,Thursday,Saturday,Sunday",
         "id": "550e8400-e29b-41d4-a716-446655440004"
     },
     {
@@ -58,5 +58,95 @@
         "isActive": false,
         "interval": "Friday",
         "id": "550e8400-e29b-41d4-a716-446655440009"
+    },
+    {
+        "title": "Evening Walk",
+        "isActive": true,
+        "interval": "Monday,Thursday,Saturday",
+        "id": "550e8400-e29b-41d4-a716-446655440010"
+    },
+    {
+        "title": "Stretching",
+        "isActive": true,
+        "interval": "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday",
+        "id": "550e8400-e29b-41d4-a716-446655440011"
+    },
+    {
+        "title": "Drink More Water",
+        "isActive": true,
+        "interval": "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday",
+        "id": "550e8400-e29b-41d4-a716-446655440012"
+    },
+    {
+        "title": "Clean Workspace",
+        "isActive": true,
+        "interval": "Monday,Wednesday,Friday",
+        "id": "550e8400-e29b-41d4-a716-446655440013"
+    },
+    {
+        "title": "Plan Tomorrow",
+        "isActive": true,
+        "interval": "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday",
+        "id": "550e8400-e29b-41d4-a716-446655440014"
+    },
+    {
+        "title": "Check Budget",
+        "isActive": true,
+        "interval": "Sunday",
+        "id": "550e8400-e29b-41d4-a716-446655440015"
+    },
+    {
+        "title": "Read News",
+        "isActive": true,
+        "interval": "Monday,Tuesday,Thursday,Friday",
+        "id": "550e8400-e29b-41d4-a716-446655440016"
+    },
+    {
+        "title": "Tidy Up Room",
+        "isActive": true,
+        "interval": "Wednesday,Saturday,Sunday",
+        "id": "550e8400-e29b-41d4-a716-446655440017"
+    },
+    {
+        "title": "Journal Gratitude",
+        "isActive": true,
+        "interval": "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday",
+        "id": "550e8400-e29b-41d4-a716-446655440018"
+    },
+    {
+        "title": "Listen to Podcast",
+        "isActive": true,
+        "interval": "Tuesday,Thursday,Saturday",
+        "id": "550e8400-e29b-41d4-a716-446655440019"
+    },
+    {
+        "title": "Social Media Detox",
+        "isActive": true,
+        "interval": "Friday,Sunday",
+        "id": "550e8400-e29b-41d4-a716-446655440020"
+    },
+    {
+        "title": "Practice Coding",
+        "isActive": true,
+        "interval": "Monday,Wednesday,Friday,Saturday",
+        "id": "550e8400-e29b-41d4-a716-446655440021"
+    },
+    {
+        "title": "Do a Good Deed",
+        "isActive": true,
+        "interval": "Tuesday,Thursday,Sunday",
+        "id": "550e8400-e29b-41d4-a716-446655440022"
+    },
+    {
+        "title": "Skincare Routine",
+        "isActive": true,
+        "interval": "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday",
+        "id": "550e8400-e29b-41d4-a716-446655440023"
+    },
+    {
+        "title": "Declutter One Item",
+        "isActive": false,
+        "interval": "Monday,Wednesday,Friday",
+        "id": "550e8400-e29b-41d4-a716-446655440024"
     }
 ]

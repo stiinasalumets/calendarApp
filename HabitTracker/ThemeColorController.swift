@@ -6,7 +6,7 @@ class ThemeColorController {
         var newColor = false
         while (!newColor) {
             print("randomColorInList loop")
-            var color = randomColor()
+            let color = randomColor()
             
             if (color != prevColor) {
                 newColor = true

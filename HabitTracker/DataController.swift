@@ -17,7 +17,7 @@ class DataController: ObservableObject {
                 print("❌ Core Data failed to load: \(error.localizedDescription)")
             } else {
                 print("✅ Core Data loaded successfully: \(description.url?.absoluteString ?? "Unknown URL")")
-                self.populateHabitsIfNeeded() // Call method to load JSON data
+                self.populateHabitsIfNeeded()
                 self.populateSettingsIfNeeded()
             }
         }
@@ -31,6 +31,9 @@ class DataController: ObservableObject {
             let count = try context.count(for: fetchRequest)
             if count == 0 {
                 try loadHabitsFromJSON(context: context)
+            } else {
+                try
+                populateDailyHabits(context: context)
             }
         } catch {
             print("❌ Error checking Core Data: \(error.localizedDescription)")
@@ -50,7 +53,7 @@ class DataController: ObservableObject {
                 setting.notificationInterval = "8:00"
                 
                 try context.save()
-                print("Settings loaded into Core Data")
+                print("✅ Settings loaded into Core Data")
             }
         } catch {
             print("❌ Error checking Core Data: \(error.localizedDescription)")
@@ -73,26 +76,69 @@ class DataController: ObservableObject {
             habit.title = habitData.title
             habit.isActive = habitData.isActive
             habit.interval = habitData.interval
-            try populateDailyHabits(context: context, habit: habit)
+            try context.save()
+            try populateDailyHabitsForAllHabits(context: context, habit: habit)
         }
         print("✅ Habits loaded into Core Data")
     }
     
-    func populateDailyHabits(context: NSManagedObjectContext, habit: AllHabits) throws {
+    func populateDailyHabitsForAllHabits(context: NSManagedObjectContext, habit: AllHabits) throws {
         let calendar = Calendar.current
-        let today = Date()
-        
-        for dayOffset in 0..<14 {  // Loop for the past 14 days
-            if let date = calendar.date(byAdding: .day, value: -dayOffset, to: today) {
-                let dailyHabit = DailyHabits(context: context)
-                dailyHabit.id = UUID()
-                dailyHabit.isCompleted = [true, true, false].randomElement() ?? false
-                dailyHabit.date = date
-                dailyHabit.habit = habit // Assuming DailyHabits has a relationship to AllHabits
+        let today = calendar.startOfDay(for: Date())
+
+        let fetchRequest: NSFetchRequest<DailyHabits> = DailyHabits.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "habit == %@", habit)
+
+        let existingDailyHabits = try context.fetch(fetchRequest)
+        let count = try context.count(for: fetchRequest)
+
+        let weekdayFormatter = DateFormatter()
+        weekdayFormatter.dateFormat = "EEEE"
+
+        for dayOffset in 0..<14 {
+            guard let date = calendar.date(byAdding: .day, value: -dayOffset, to: today) else { continue }
+            let day = calendar.startOfDay(for: date)
+
+            let weekdayName = weekdayFormatter.string(from: day).lowercased()
+
+            let alreadyExists = existingDailyHabits.contains { dh in
+                if let dhDate = dh.date {
+                    return calendar.isDate(dhDate, inSameDayAs: day)
+                }
+                return false
+            }
+
+            if !alreadyExists,
+               let interval = habit.interval?.lowercased() {
+                
+                let allowedDays = interval
+                    .components(separatedBy: ",")
+                    .map { $0.trimmingCharacters(in: .whitespaces) }
+                
+
+                if allowedDays.contains(weekdayName) && habit.isActive {
+                    let dailyHabit = DailyHabits(context: context)
+                    dailyHabit.id = UUID()
+                    if day == today || count != 0 {
+                        dailyHabit.isCompleted = false
+                    } else {
+                        dailyHabit.isCompleted = [true, false, false].randomElement() ?? false
+                    }
+                    dailyHabit.date = day
+                    dailyHabit.habit = habit
+                }
             }
         }
-        
+
         try context.save()
     }
 
+    
+    func populateDailyHabits(context: NSManagedObjectContext) throws {
+        let fetchRequest: NSFetchRequest<AllHabits> = AllHabits.fetchRequest()
+        let habits = try context.fetch(fetchRequest)
+        for habit in habits {
+            try populateDailyHabitsForAllHabits(context: context, habit: habit)
+        }
+    }
 }
