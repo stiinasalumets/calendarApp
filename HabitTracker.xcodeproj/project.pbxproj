@@ -42,6 +42,11 @@
 		E1EF8DB22DB7736000283627 /* NavigationStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DB12DB7736000283627 /* NavigationStackManager.swift */; };
 		E1EF8DB42DB7753D00283627 /* NavigationContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DB32DB7753D00283627 /* NavigationContainerView.swift */; };
 		E1EF8DB62DB7816F00283627 /* ThemeColorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DB52DB7816F00283627 /* ThemeColorController.swift */; };
+		E1EF8DB82DB7946D00283627 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DB72DB7946D00283627 /* StatisticsView.swift */; };
+		E1EF8DBA2DB7947F00283627 /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DB92DB7947F00283627 /* StatisticsViewModel.swift */; };
+		E1EF8DBC2DB9028900283627 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DBB2DB9028900283627 /* LocalNotificationManager.swift */; };
+		E1EF8DBE2DBF99C300283627 /* DonutChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DBD2DBF99C200283627 /* DonutChartView.swift */; };
+		E1EF8DC82DC007EE00283627 /* keyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EF8DC72DC007EE00283627 /* keyboardObserver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +87,12 @@
 		E1EF8DB12DB7736000283627 /* NavigationStackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationStackManager.swift; sourceTree = "<group>"; };
 		E1EF8DB32DB7753D00283627 /* NavigationContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationContainerView.swift; sourceTree = "<group>"; };
 		E1EF8DB52DB7816F00283627 /* ThemeColorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColorController.swift; sourceTree = "<group>"; };
+		E1EF8DB72DB7946D00283627 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		E1EF8DB92DB7947F00283627 /* StatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModel.swift; sourceTree = "<group>"; };
+		E1EF8DBB2DB9028900283627 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
+		E1EF8DBD2DBF99C200283627 /* DonutChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutChartView.swift; sourceTree = "<group>"; };
+		E1EF8DC52DBF9F2700283627 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.2.sdk/System/Library/Frameworks/Charts.framework; sourceTree = DEVELOPER_DIR; };
+		E1EF8DC72DC007EE00283627 /* keyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keyboardObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +113,7 @@
 				E1ECA2BD2DA54ED100231DDA /* Settings+CoreDataProperties.swift */,
 				481E79FC2D7789E1006EB49E /* HabitTracker */,
 				481E79FB2D7789E1006EB49E /* Products */,
+				E1EF8DC42DBF9EBD00283627 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,6 +149,8 @@
 				AEF682D62D804709004ABEF7 /* CalendarView.swift */,
 				E1ECA2C02DAA461300231DDA /* SettingView.swift */,
 				E1ECA2C22DAA462600231DDA /* SettingView-ViewModel.swift */,
+				E1EF8DB72DB7946D00283627 /* StatisticsView.swift */,
+				E1EF8DB92DB7947F00283627 /* StatisticsViewModel.swift */,
 				481E7A012D7789E3006EB49E /* Assets.xcassets */,
 				481E7A032D7789E3006EB49E /* HabitTracker.entitlements */,
 				481E7A042D7789E3006EB49E /* Preview Content */,
@@ -148,6 +162,9 @@
 				AEEBB9412D9BFEEB0086DA58 /* ProgressBarView.swift */,
 				AEEBB9432D9C00F20086DA58 /* ProgressBarView-ViewModel.swift */,
 				E1EF8DB52DB7816F00283627 /* ThemeColorController.swift */,
+				E1EF8DBB2DB9028900283627 /* LocalNotificationManager.swift */,
+				E1EF8DBD2DBF99C200283627 /* DonutChartView.swift */,
+				E1EF8DC72DC007EE00283627 /* keyboardObserver.swift */,
 			);
 			path = HabitTracker;
 			sourceTree = "<group>";
@@ -178,6 +195,14 @@
 			path = AllHabitsItem;
 			sourceTree = "<group>";
 		};
+		E1EF8DC42DBF9EBD00283627 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E1EF8DC52DBF9F2700283627 /* Charts.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -194,6 +219,8 @@
 			dependencies = (
 			);
 			name = HabitTracker;
+			packageProductDependencies = (
+			);
 			productName = HabitTracker;
 			productReference = 481E79FA2D7789E1006EB49E /* HabitTracker.app */;
 			productType = "com.apple.product-type.application";
@@ -222,6 +249,8 @@
 				Base,
 			);
 			mainGroup = 481E79F12D7789E1006EB49E;
+			packageReferences = (
+			);
 			productRefGroup = 481E79FB2D7789E1006EB49E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -251,12 +280,16 @@
 			files = (
 				E1ECA2AB2D9BFAF400231DDA /* habitView-ViewModel.swift in Sources */,
 				E1ECA2B12D9C026E00231DDA /* HabitDetailView.swift in Sources */,
+				E1EF8DBE2DBF99C300283627 /* DonutChartView.swift in Sources */,
 				E1ECA2AF2D9BFEBD00231DDA /* HabitViewCard.swift in Sources */,
 				E1ECA2C32DAA462600231DDA /* SettingView-ViewModel.swift in Sources */,
 				E1EF8DB22DB7736000283627 /* NavigationStackManager.swift in Sources */,
 				E160D0552D89985500CF27EA /* BottombarButtonView.swift in Sources */,
 				AE114C0F2D888B8200B1F665 /* AllHabits+CoreDataClass.swift in Sources */,
+				E1EF8DBC2DB9028900283627 /* LocalNotificationManager.swift in Sources */,
+				E1EF8DBA2DB7947F00283627 /* StatisticsViewModel.swift in Sources */,
 				AE114C102D888B8200B1F665 /* AllHabits+CoreDataProperties.swift in Sources */,
+				E1EF8DC82DC007EE00283627 /* keyboardObserver.swift in Sources */,
 				AE114C112D888B8200B1F665 /* DailyHabits+CoreDataClass.swift in Sources */,
 				E1ECA2BB2DA3E4FE00231DDA /* deleteView-ViewModel.swift in Sources */,
 				E1EF8DB42DB7753D00283627 /* NavigationContainerView.swift in Sources */,
@@ -268,6 +301,7 @@
 				AE114C122D888B8200B1F665 /* DailyHabits+CoreDataProperties.swift in Sources */,
 				E1ECA2B32D9C12BA00231DDA /* HabitForm-ViewModel.swift in Sources */,
 				481E7A002D7789E1006EB49E /* ContentView.swift in Sources */,
+				E1EF8DB82DB7946D00283627 /* StatisticsView.swift in Sources */,
 				E1ECA2B72D9C688F00231DDA /* EditView.swift in Sources */,
 				AEF682D72D804709004ABEF7 /* CalendarView.swift in Sources */,
 				E1ECA2C12DAA461300231DDA /* SettingView.swift in Sources */,

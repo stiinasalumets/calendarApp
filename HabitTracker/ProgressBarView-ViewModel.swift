@@ -10,6 +10,5 @@ extension ProgressBarView {
         init(moc: NSManagedObjectContext) {
             self.moc = moc
         }
-        
     }
 }

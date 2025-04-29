@@ -14,6 +14,4 @@ struct AddView: View {
     var body: some View {
         HabitForm(selectedTab: $selectedTab, moc: moc)
     }
-
-    
 }

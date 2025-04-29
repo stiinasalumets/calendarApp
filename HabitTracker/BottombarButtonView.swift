@@ -1,4 +1,3 @@
-import Foundation
 import SwiftUI
 
 struct BottombarButtonView: View {
@@ -13,10 +12,9 @@ struct BottombarButtonView: View {
                     .frame(height: 0)
                 Image(image)
                     .resizable()
-                    .frame(width: 24, height: 24)
-                    //.colorInvert(isActive ? .purple : .gray)
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(isActive ?  .purple : Color("grey"))
             }
-            
         }
     }
 }

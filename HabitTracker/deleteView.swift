@@ -23,8 +23,23 @@ struct deleteView: View {
         VStack {
             Spacer()
             
-            Text("Are you sure you want to delete \(title)")
-            Text("This action cannot be un done")
+            (
+                Text("Are you sure you want to ") +
+                Text("delete ").fontWeight(.bold) +
+                Text(title)
+            )
+            .font(.title2)
+            .multilineTextAlignment(.center)
+            .foregroundColor(Color("grey"))
+            
+            (
+                Text("This action ") +
+                Text("cannot ").fontWeight(.bold) +
+                Text("be un done")
+            )
+            .font(.title2)
+            .multilineTextAlignment(.center)
+            .foregroundColor(Color("grey"))
             
             Spacer()
             
@@ -33,19 +48,18 @@ struct deleteView: View {
                 Spacer()
                 Button("Delete") {
                     viewModel.deleteHabit(habitID: habitID)
-                    selectedTab = .habit
-                }
+                    navManager.clear()
+                }.foregroundColor(.red)
+                
                 Spacer()
                 
                 Button("Cancel") {
                     
                     navManager.pop()
-                }
+                }.foregroundColor(Color("grey"))
+                
                 Spacer()
             }
-            
         }
     }
-
-    
 }

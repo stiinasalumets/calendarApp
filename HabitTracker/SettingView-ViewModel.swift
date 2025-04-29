@@ -5,12 +5,40 @@ extension SettingView {
     class ViewModel: ObservableObject {
         
         private var moc: NSManagedObjectContext
+        var lnManager: LocalNotificationManager
         @Published var setting: [Settings] = []
+        @State private var hasInitialized = false
         
-        init(moc: NSManagedObjectContext) {
+        init(moc: NSManagedObjectContext, lnManeger: LocalNotificationManager) {
             self.moc = moc
+            self.lnManager = lnManeger
             fetchSettings()
+            Task {
+                await lnManager.initializeNotificationsIfNeeded()
+            }
         }
+        
+        func initializeNotificationsIfNeeded()  {
+            
+            print("initializeNotifications")
+            print("hasInitializedNotifications \(hasInitialized)")
+            
+             
+            Task {
+                let count = await lnManager.getPendingNotificationCount()
+                print("pending in init: \(String(count))")
+                if count == 0 {
+                    let count = await lnManager.getPendingNotificationCount()
+                    if (count == 0) {
+                        let dateComponents = DateComponents(hour: 8, minute: 0) //Initial time for notifications
+                        let localNotification = LocalNotification(identifier: UUID().uuidString, title: "Remember to complete your habits", body: "You have uncompleted habits, lets get it done", dateComponents: dateComponents, repeats: true)
+                        await lnManager.schedule(localNotification: localNotification)
+                    }
+                }
+            }
+        }
+        
+       
         
         func fetchSettings() {
             let request: NSFetchRequest<Settings> = Settings.fetchRequest()
@@ -35,7 +63,5 @@ extension SettingView {
                 print("❌ Failed to delete all habits: \(error)")
             }
         }
-        
-        
     }
 }

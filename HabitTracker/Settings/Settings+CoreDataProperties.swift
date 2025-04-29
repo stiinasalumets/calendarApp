@@ -1,11 +1,3 @@
-//
-//  Settings+CoreDataProperties.swift
-//  HabitTracker
-//
-//  Created by Andreas Petersen on 08/04/2025.
-//
-//
-
 import Foundation
 import CoreData
 

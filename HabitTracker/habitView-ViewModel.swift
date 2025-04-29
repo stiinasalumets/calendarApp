@@ -8,7 +8,6 @@ extension habitView {
             var moc: NSManagedObjectContext
         
             let colorController = ThemeColorController()
-            
             var prevColor: String = ""
             
             init(moc: NSManagedObjectContext) {
@@ -28,13 +27,9 @@ extension habitView {
                 }
             }
             
-        
-        
             func chooseListColor() -> String {
-                print("prevColor: \(prevColor)")
                 let color = colorController.randomColorInList(prevColor: prevColor)
-                //let color = colorController.randomColor()
-                print("color: \(color)")
+                
                 prevColor = color
                 
                 return color

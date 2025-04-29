@@ -24,7 +24,7 @@ struct BottomBarView: View {
                 selectedTab = .calendar
             } label: {
                 ZStack{
-                    BottombarButtonView(image: "calendar", isActive: selectedTab == .calendar)
+                    BottombarButtonView(image: "Calendar", isActive: selectedTab == .calendar)
                 }
             }
             
@@ -34,7 +34,7 @@ struct BottomBarView: View {
                 selectedTab = .habit
             } label: {
                 ZStack{
-                    BottombarButtonView(image: "habits", isActive: selectedTab == .habit)
+                    BottombarButtonView(image: "Habit", isActive: selectedTab == .habit)
                 }
             }
             
@@ -58,7 +58,6 @@ struct BottomBarView: View {
                                         }
                                     }.padding(EdgeInsets(top: 15, leading: 0, bottom: 0, trailing: 0))
                                         Spacer()
-                                                            
                                 }
                             }
             
@@ -68,7 +67,7 @@ struct BottomBarView: View {
                 selectedTab = .statistics
             } label: {
                 ZStack{
-                    BottombarButtonView(image: "statistics",  isActive: selectedTab == .statistics)
+                    BottombarButtonView(image: "Stats",  isActive: selectedTab == .statistics)
                 }
             }
             
@@ -78,13 +77,12 @@ struct BottomBarView: View {
                 selectedTab = .settings
             } label: {
                 ZStack{
-                    BottombarButtonView(image: "settings",  isActive: selectedTab == .settings)
+                    BottombarButtonView(image: "Settings",  isActive: selectedTab == .settings)
                 }
             }
         }
         .frame(height: 90)
         .background(Color("purple"))
-
         .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 0)
     }
 }

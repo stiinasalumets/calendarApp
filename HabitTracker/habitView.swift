@@ -16,13 +16,14 @@ struct habitView: View {
         _viewModel = StateObject(wrappedValue: ViewModel(moc: moc))
     }
     
-    
-    
-    
-    
     var body: some View {
         VStack(spacing: 0) {
-            Text("Habits")
+            VStack {
+                Text("Habits")
+                    .font(.largeTitle)
+                    .padding([.top, .bottom])
+                    .foregroundColor(Color("grey"))
+            }
             
             GeometryReader { geometry in
                 ScrollView {
@@ -52,8 +53,6 @@ struct habitView: View {
         }
         .padding(0)
     }
-    
-    
 }
 
 //struct habitView_Previews: PreviewProvider {
