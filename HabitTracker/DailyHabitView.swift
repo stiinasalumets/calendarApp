@@ -6,11 +6,20 @@ struct DailyHabitView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(entity: DailyHabits.entity(), sortDescriptors: []) private var dailyHabits: FetchedResults<DailyHabits>
+    var habitsForDay: [DailyHabits] {
+        dailyHabits.filter { $0.date?.isSameDay(as: currentDate) ?? false }
+    }
 
     let currentDate: Date
 
     @State private var showReward = false
     @State private var rewardImageURL: URL?
+
+    // Store random colors per habit row to keep them stable on rerenders
+    @State private var habitColors: [UUID: String] = [:]
+
+    // Theme controller instance
+    private let themeColorController = ThemeColorController()
 
     var dayOfTheWeek: String {
         let dateFormatter = DateFormatter()
@@ -62,6 +71,7 @@ struct DailyHabitView: View {
                                 }
                             ))
                             .labelsHidden()
+                            .tint(colorFromName(habitColor(for: habit)))
                         }
                         .padding(.vertical, 8)
                     }
@@ -93,6 +103,36 @@ struct DailyHabitView: View {
         }
         .padding(.top)
         .animation(.easeInOut, value: showReward)
+        .onAppear {
+            assignColors(to: habitsForDay)
+        }
+    }
+
+    private func assignColors(to habits: [DailyHabits]) {
+        var previousColor = ""
+        var updatedColors: [UUID: String] = [:]
+
+        for habit in habits {
+            guard let id = habit.id else { continue }
+
+            let color = themeColorController.randomColorInList(prevColor: previousColor)
+            updatedColors[id] = color
+            previousColor = color
+        }
+
+        habitColors = updatedColors
+    }
+
+    private func habitColor(for habit: DailyHabits) -> String {
+        if let id = habit.id, let color = habitColors[id] {
+            return color
+        } else {
+            return "blue" 
+        }
+    }
+
+    private func colorFromName(_ name: String) -> Color {
+        return Color(name)
     }
 
     private func saveContext() {
@@ -119,7 +159,6 @@ struct DailyHabitView: View {
         let isDogPerson = settings.dogPerson
         let isCatPerson = settings.catPerson
 
-        // Determine which animal to fetch
         let fetchCat = (isCatPerson && !isDogPerson) ||
                        (isCatPerson && isDogPerson && Bool.random())
 
@@ -129,7 +168,7 @@ struct DailyHabitView: View {
             fetchDogImage()
         }
     }
-    
+
     private func fetchCatImage() {
         guard let url = URL(string: "https://api.thecatapi.com/v1/images/search") else { return }
 
@@ -174,6 +213,4 @@ struct DailyHabitView: View {
             }
         }.resume()
     }
-
-
 }
