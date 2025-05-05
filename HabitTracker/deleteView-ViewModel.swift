@@ -15,11 +15,8 @@ extension deleteView {
         
         func deleteHabit(habitID: NSManagedObjectID) {
             do {
-                // Fetch the existing habit by ID
                 if let habit = try moc.existingObject(with: habitID) as? AllHabits {
                     habit.isActive = false
-
-                    // Save changes
                     try moc.save()
                     print("✅ Habit updated successfully.")
                 } else {

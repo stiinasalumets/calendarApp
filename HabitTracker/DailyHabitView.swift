@@ -15,8 +15,8 @@ struct DailyHabitView: View {
     }
 
     @State private var dragOffset = CGSize.zero
-    @State private var isRewardVisible = false  // Start with the reward hidden
-    @State private var isSwipeToHideEnabled = true // Control swipe-to-hide behavior
+    @State private var isRewardVisible = false 
+    @State private var isSwipeToHideEnabled = true
 
     var body: some View {
         VStack {
@@ -41,7 +41,7 @@ struct DailyHabitView: View {
                                 }
                             }
                             .onEnded { value in
-                                if dragOffset.height > 100 {  // Threshold for swipe-down to hide the image
+                                if dragOffset.height > 100 {
                                     withAnimation {
                                         isRewardVisible = false
                                     }
@@ -93,7 +93,6 @@ struct DailyHabitView: View {
                             viewModel.saveContext()
                             if newValue {
                                 viewModel.handleHabitCompletion()
-                                // Make the reward image visible when the habit is marked as completed
                                 isRewardVisible = true
                             }
                         }

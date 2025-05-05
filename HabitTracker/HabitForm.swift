@@ -3,8 +3,6 @@ import CoreData
 
 struct HabitForm: View {
     @EnvironmentObject var navManager: NavigationStackManager
-    //@State private var title: String = ""
-    //@State private var selectedDays: Set<String> = []
     @State private var title: String
     @State private var selectedDays: Set<String> = []
     @State private var habitID: NSManagedObjectID? = nil

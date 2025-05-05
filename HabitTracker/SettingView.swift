@@ -108,15 +108,8 @@ struct SettingView: View {
                         }.buttonStyle(.borderedProminent)
                     }
                 }
-                
-               
-                
-                
-                
-                
-                
             }
-            .listStyle(InsetGroupedListStyle()) // Optional, for a native Settings look
+            .listStyle(InsetGroupedListStyle())
         }
         .onAppear {
             if let setting = viewModel.setting.first {

@@ -30,7 +30,7 @@ extension SettingView {
                 if count == 0 {
                     let count = await lnManager.getPendingNotificationCount()
                     if (count == 0) {
-                        let dateComponents = DateComponents(hour: 8, minute: 0) //Initial time for notifications
+                        let dateComponents = DateComponents(hour: 8, minute: 0)
                         let localNotification = LocalNotification(identifier: UUID().uuidString, title: "Remember to complete your habits", body: "You have uncompleted habits, lets get it done", dateComponents: dateComponents, repeats: true)
                         await lnManager.schedule(localNotification: localNotification)
                     }
