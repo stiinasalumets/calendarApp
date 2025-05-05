@@ -10,10 +10,13 @@ struct DailyHabitView: View {
     let currentDate: Date
     @StateObject private var viewModel = DailyHabitViewModel()
 
-    // FIX: Computed property for habitsForDay (just like original code)
     private var habitsForDay: [DailyHabits] {
         dailyHabits.filter { $0.date?.isSameDay(as: currentDate) ?? false }
     }
+
+    @State private var dragOffset = CGSize.zero
+    @State private var isRewardVisible = false  // Start with the reward hidden
+    @State private var isSwipeToHideEnabled = true // Control swipe-to-hide behavior
 
     var body: some View {
         VStack {
@@ -27,8 +30,25 @@ struct DailyHabitView: View {
                 habitsList(habitsForDay: habitsForDay)
             }
 
-            if viewModel.showReward, let imageURL = viewModel.rewardImageURL {
+            if viewModel.showReward, let imageURL = viewModel.rewardImageURL, isRewardVisible {
                 rewardView(imageURL: imageURL)
+                    .offset(y: dragOffset.height)
+                    .gesture(
+                        DragGesture()
+                            .onChanged { value in
+                                if value.translation.height > 0 {
+                                    dragOffset = value.translation
+                                }
+                            }
+                            .onEnded { value in
+                                if dragOffset.height > 100 {  // Threshold for swipe-down to hide the image
+                                    withAnimation {
+                                        isRewardVisible = false
+                                    }
+                                }
+                                dragOffset = .zero
+                            }
+                    )
             }
         }
         .padding(.top)
@@ -38,7 +58,6 @@ struct DailyHabitView: View {
             viewModel.setContext(viewContext)
         }
     }
-
 
     private var header: some View {
         HStack {
@@ -74,6 +93,8 @@ struct DailyHabitView: View {
                             viewModel.saveContext()
                             if newValue {
                                 viewModel.handleHabitCompletion()
+                                // Make the reward image visible when the habit is marked as completed
+                                isRewardVisible = true
                             }
                         }
                     ))
