@@ -27,13 +27,11 @@ extension HabitForm {
         
         func updateHabit(title: String, selectedDays: Set<String>, habitID: NSManagedObjectID) {
             do {
-                // Fetch the existing habit by ID
                 if let habit = try moc.existingObject(with: habitID) as? AllHabits {
                     habit.title = title
                     habit.interval = selectedDays.sorted().joined(separator: ",")
                     habit.isActive = true
 
-                    // Save changes
                     try moc.save()
                     print("✅ Habit updated successfully.")
                 } else {

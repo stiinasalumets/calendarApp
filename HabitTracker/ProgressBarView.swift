@@ -14,7 +14,6 @@ struct ProgressBarView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                // Background bar
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(barColor.opacity(0.6), lineWidth: 2)
                     .background(
@@ -23,7 +22,6 @@ struct ProgressBarView: View {
                     )
                     .frame(width: geometry.size.width, height: 30)
 
-                // Filled progress bar
                 if totalHabits > 0 {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(barColor)
@@ -34,7 +32,6 @@ struct ProgressBarView: View {
                         .mask(RoundedRectangle(cornerRadius: 10))
                 }
 
-                // Progress text
                 Text("\(completedHabits)/\(totalHabits)")
                     .foregroundColor(Color("grey"))
                     .font(.system(size: 14, weight: .bold))
