@@ -18,7 +18,7 @@ struct NavigationContainerView: View {
                     }
                     
                     if selectedTab == .habit {
-                        habitView(selectedTab: $selectedTab, moc: moc)
+                        HabitView(selectedTab: $selectedTab, moc: moc)
                     }
                     
                     if selectedTab == .add {

@@ -18,6 +18,9 @@
 		AE114C102D888B8200B1F665 /* AllHabits+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE114C0C2D888B8200B1F665 /* AllHabits+CoreDataProperties.swift */; };
 		AE114C112D888B8200B1F665 /* DailyHabits+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE114C0D2D888B8200B1F665 /* DailyHabits+CoreDataClass.swift */; };
 		AE114C122D888B8200B1F665 /* DailyHabits+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE114C0E2D888B8200B1F665 /* DailyHabits+CoreDataProperties.swift */; };
+		AE35457E2DC9063D005586A9 /* CalendarView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE35457B2DC9063D005586A9 /* CalendarView-ViewModel.swift */; };
+		AE35457F2DC9063D005586A9 /* HabitDetailView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE35457D2DC9063D005586A9 /* HabitDetailView-ViewModel.swift */; };
+		AE3545802DC9063D005586A9 /* DailyHabitView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE35457C2DC9063D005586A9 /* DailyHabitView-ViewModel.swift */; };
 		AEA3B33D2D9BC0CB00F7312F /* habitData.json in Resources */ = {isa = PBXBuildFile; fileRef = AEA3B33C2D9BC0CB00F7312F /* habitData.json */; };
 		AEA3B33F2D9BD8A600F7312F /* habitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA3B33E2D9BD8A600F7312F /* habitView.swift */; };
 		AEEBB93D2D9BE8120086DA58 /* addView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEBB93C2D9BE8120086DA58 /* addView-ViewModel.swift */; };
@@ -75,6 +78,9 @@
 		AE114C0C2D888B8200B1F665 /* AllHabits+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AllHabits+CoreDataProperties.swift"; path = "../AllHabits+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AE114C0D2D888B8200B1F665 /* DailyHabits+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DailyHabits+CoreDataClass.swift"; path = "../DailyHabits+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AE114C0E2D888B8200B1F665 /* DailyHabits+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DailyHabits+CoreDataProperties.swift"; path = "../DailyHabits+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AE35457B2DC9063D005586A9 /* CalendarView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarView-ViewModel.swift"; sourceTree = "<group>"; };
+		AE35457C2DC9063D005586A9 /* DailyHabitView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyHabitView-ViewModel.swift"; sourceTree = "<group>"; };
+		AE35457D2DC9063D005586A9 /* HabitDetailView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HabitDetailView-ViewModel.swift"; sourceTree = "<group>"; };
 		AEA3B33C2D9BC0CB00F7312F /* habitData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = habitData.json; sourceTree = "<group>"; };
 		AEA3B33E2D9BD8A600F7312F /* habitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = habitView.swift; sourceTree = "<group>"; };
 		AEEBB93C2D9BE8120086DA58 /* addView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "addView-ViewModel.swift"; sourceTree = "<group>"; };
@@ -152,43 +158,46 @@
 		481E79FC2D7789E1006EB49E /* HabitTracker */ = {
 			isa = PBXGroup;
 			children = (
+				E1DD84082D954BC100884491 /* AddView.swift */,
+				AEEBB93C2D9BE8120086DA58 /* addView-ViewModel.swift */,
+				AE114C142D888BAB00B1F665 /* AllHabitsItem */,
+				481E7A012D7789E3006EB49E /* Assets.xcassets */,
+				E160D0542D89985500CF27EA /* BottombarButtonView.swift */,
+				E160D0522D8991FB00CF27EA /* BottomBarView.swift */,
+				AEF682D62D804709004ABEF7 /* CalendarView.swift */,
+				AE35457B2DC9063D005586A9 /* CalendarView-ViewModel.swift */,
+				481E79FF2D7789E1006EB49E /* ContentView.swift */,
+				AE114C132D888B9300B1F665 /* DailyHabitsItem */,
+				481E7A0E2D7E26F2006EB49E /* DailyHabitView.swift */,
+				AE35457C2DC9063D005586A9 /* DailyHabitView-ViewModel.swift */,
+				AE114C052D887D5A00B1F665 /* DataController.swift */,
+				E1ECA2B82DA3E4E300231DDA /* deleteView.swift */,
+				E1ECA2BA2DA3E4FE00231DDA /* deleteView-ViewModel.swift */,
+				E1EF8DBD2DBF99C200283627 /* DonutChartView.swift */,
+				E1ECA2B62D9C688F00231DDA /* EditView.swift */,
+				AEA3B33C2D9BC0CB00F7312F /* habitData.json */,
+				E1ECA2B02D9C026E00231DDA /* HabitDetailView.swift */,
+				AE35457D2DC9063D005586A9 /* HabitDetailView-ViewModel.swift */,
+				E1ECA2AC2D9BFDAF00231DDA /* HabitForm.swift */,
+				E1ECA2B22D9C12BA00231DDA /* HabitForm-ViewModel.swift */,
+				481E7A032D7789E3006EB49E /* HabitTracker.entitlements */,
+				AE114BF02D88778900B1F665 /* HabitTracker.xcdatamodeld */,
+				481E79FD2D7789E1006EB49E /* HabitTrackerApp.swift */,
 				AEA3B33E2D9BD8A600F7312F /* habitView.swift */,
 				E1ECA2AA2D9BFAF400231DDA /* habitView-ViewModel.swift */,
 				E1ECA2AE2D9BFEBD00231DDA /* HabitViewCard.swift */,
-				E1ECA2B02D9C026E00231DDA /* HabitDetailView.swift */,
-				E1ECA2AC2D9BFDAF00231DDA /* HabitForm.swift */,
-				E1ECA2B22D9C12BA00231DDA /* HabitForm-ViewModel.swift */,
-				AEA3B33C2D9BC0CB00F7312F /* habitData.json */,
-				E1ECA2B62D9C688F00231DDA /* EditView.swift */,
-				E1DD84082D954BC100884491 /* AddView.swift */,
-				E1ECA2B82DA3E4E300231DDA /* deleteView.swift */,
-				E1ECA2BA2DA3E4FE00231DDA /* deleteView-ViewModel.swift */,
-				481E7A0E2D7E26F2006EB49E /* DailyHabitView.swift */,
-				E160D0522D8991FB00CF27EA /* BottomBarView.swift */,
-				E160D0542D89985500CF27EA /* BottombarButtonView.swift */,
-				481E79FD2D7789E1006EB49E /* HabitTrackerApp.swift */,
-				E1EF8DB12DB7736000283627 /* NavigationStackManager.swift */,
-				481E79FF2D7789E1006EB49E /* ContentView.swift */,
+				E1EF8DC72DC007EE00283627 /* keyboardObserver.swift */,
+				E1EF8DBB2DB9028900283627 /* LocalNotificationManager.swift */,
 				E1EF8DB32DB7753D00283627 /* NavigationContainerView.swift */,
-				AEF682D62D804709004ABEF7 /* CalendarView.swift */,
+				E1EF8DB12DB7736000283627 /* NavigationStackManager.swift */,
+				481E7A042D7789E3006EB49E /* Preview Content */,
+				AEEBB9412D9BFEEB0086DA58 /* ProgressBarView.swift */,
+				AEEBB9432D9C00F20086DA58 /* ProgressBarView-ViewModel.swift */,
 				E1ECA2C02DAA461300231DDA /* SettingView.swift */,
 				E1ECA2C22DAA462600231DDA /* SettingView-ViewModel.swift */,
 				E1EF8DB72DB7946D00283627 /* StatisticsView.swift */,
 				E1EF8DB92DB7947F00283627 /* StatisticsViewModel.swift */,
-				481E7A012D7789E3006EB49E /* Assets.xcassets */,
-				481E7A032D7789E3006EB49E /* HabitTracker.entitlements */,
-				481E7A042D7789E3006EB49E /* Preview Content */,
-				AE114BF02D88778900B1F665 /* HabitTracker.xcdatamodeld */,
-				AE114C052D887D5A00B1F665 /* DataController.swift */,
-				AE114C132D888B9300B1F665 /* DailyHabitsItem */,
-				AE114C142D888BAB00B1F665 /* AllHabitsItem */,
-				AEEBB93C2D9BE8120086DA58 /* addView-ViewModel.swift */,
-				AEEBB9412D9BFEEB0086DA58 /* ProgressBarView.swift */,
-				AEEBB9432D9C00F20086DA58 /* ProgressBarView-ViewModel.swift */,
 				E1EF8DB52DB7816F00283627 /* ThemeColorController.swift */,
-				E1EF8DBB2DB9028900283627 /* LocalNotificationManager.swift */,
-				E1EF8DBD2DBF99C200283627 /* DonutChartView.swift */,
-				E1EF8DC72DC007EE00283627 /* keyboardObserver.swift */,
 			);
 			path = HabitTracker;
 			sourceTree = "<group>";
@@ -353,6 +362,9 @@
 				E1EF8DBA2DB7947F00283627 /* StatisticsViewModel.swift in Sources */,
 				AE114C102D888B8200B1F665 /* AllHabits+CoreDataProperties.swift in Sources */,
 				E1EF8DC82DC007EE00283627 /* keyboardObserver.swift in Sources */,
+				AE35457E2DC9063D005586A9 /* CalendarView-ViewModel.swift in Sources */,
+				AE35457F2DC9063D005586A9 /* HabitDetailView-ViewModel.swift in Sources */,
+				AE3545802DC9063D005586A9 /* DailyHabitView-ViewModel.swift in Sources */,
 				AE114C112D888B8200B1F665 /* DailyHabits+CoreDataClass.swift in Sources */,
 				E1ECA2BB2DA3E4FE00231DDA /* deleteView-ViewModel.swift in Sources */,
 				E1EF8DB42DB7753D00283627 /* NavigationContainerView.swift in Sources */,
@@ -594,14 +606,14 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = J9U7TSST43;
+				DEVELOPMENT_TEAM = 49735NNH9P;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = DTU.HabitTrackerUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = DTU.HabitTrackerUITests1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
@@ -618,13 +630,14 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 49735NNH9P;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = DTU.HabitTrackerUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = DTU.HabitTrackerUITests1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = NO;

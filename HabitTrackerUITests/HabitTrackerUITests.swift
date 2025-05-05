@@ -66,6 +66,50 @@ final class HabitTrackerUITests: XCTestCase {
         XCTAssertTrue(tuesdayLabel.exists)
     }
     
+    func testAllActiveHabitsAreDisplayedAndInactiveHabitsAreHidden() throws {
+            let app = XCUIApplication()
+            app.launch()
+
+            // Give the UI some time to load the habits list
+            sleep(2)
+
+            // List of all active habits (from your provided JSON)
+            let activeHabitTitles = [
+                "Morning Run", "Read a Book", "Yoga", "Write Journal",
+                "Grocery Shopping", "Learning a New Language", "Evening Walk",
+                "Stretching", "Drink More Water", "Clean Workspace", "Plan Tomorrow",
+                "Check Budget", "Read News", "Tidy Up Room", "Journal Gratitude",
+                "Listen to Podcast", "Social Media Detox", "Practice Coding",
+                "Do a Good Deed", "Skincare Routine"
+            ]
+
+            // List of all inactive habits
+            let inactiveHabitTitles = [
+                "Meditation", "Workout", "Call Family",
+                "Cooking Experiment", "Declutter One Item"
+            ]
+
+            // Scroll a few times to ensure all items load (basic pagination insurance)
+            let scrollView = app.scrollViews.firstMatch
+            scrollView.swipeUp()
+            scrollView.swipeUp()
+            scrollView.swipeUp()
+            
+            sleep(1)
+
+            // Assert all active habits are displayed
+            for title in activeHabitTitles {
+                let element = app.otherElements["HabitCard_\(title)"]
+                XCTAssertTrue(element.exists, "Active habit '\(title)' should be displayed.")
+            }
+
+            // Assert no inactive habits are displayed
+            for title in inactiveHabitTitles {
+                let element = app.otherElements["HabitCard_\(title)"]
+                XCTAssertFalse(element.exists, "Inactive habit '\(title)' should NOT be displayed.")
+            }
+        }
+    
     
 
     func testLaunchPerformance() throws {
@@ -77,3 +121,5 @@ final class HabitTrackerUITests: XCTestCase {
         }
     }
 }
+
+

@@ -1,65 +1,56 @@
-
-import Foundation
 import SwiftUI
 import CoreData
 
-struct habitView: View {
-    @StateObject private var viewModel: ViewModel
-    @State private var selectedHabitID: NSManagedObjectID? = nil
+struct HabitView: View {
+    @StateObject private var viewModel: HabitViewModel
     @Binding var selectedTab: BottomBarTabs
-    
-    
     @EnvironmentObject var navManager: NavigationStackManager
-    
+
     init(selectedTab: Binding<BottomBarTabs>, moc: NSManagedObjectContext) {
         self._selectedTab = selectedTab
-        _viewModel = StateObject(wrappedValue: ViewModel(moc: moc))
+        _viewModel = StateObject(wrappedValue: HabitViewModel(moc: moc))
     }
-    
+
     var body: some View {
         VStack(spacing: 0) {
-            VStack {
-                Text("Habits")
-                    .font(.largeTitle)
-                    .padding([.top, .bottom])
-                    .foregroundColor(Color("grey"))
-            }
-            
+            header
+
             GeometryReader { geometry in
                 ScrollView {
-                    ForEach(viewModel.allHabits, id: \.objectID) { habit in
-                        let habitID = habit.objectID
-                        
-                        Button(action: {
-                            navManager.push(
-                                HabitDetailView(
-                                    habit: habit,
-                                    habitID: habitID,
-                                    selectedTab: $selectedTab,
-                                    moc: viewModel.moc
-                                )
-                            )
-                        }) {
-                            HabitViewCard(title: habit.title ?? "Unknown", color: viewModel.chooseListColor())
-                                .background(
-                                    Color.clear
-                                        .accessibilityIdentifier("HabitCard_\(habit.title ?? "Unknown")")
-                                )
+                    VStack(spacing: 12) {
+                        ForEach(viewModel.allHabits, id: \.objectID) { habit in
+                            habitCard(for: habit)
                         }
-                        .buttonStyle(PlainButtonStyle())
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal)
                 }
-                .padding(0)
-                .frame(maxWidth: .infinity, maxHeight: geometry.size.height)
+                .frame(height: geometry.size.height)
             }
         }
-        .padding(0)
+    }
+
+    private var header: some View {
+        Text("Habits")
+            .font(.largeTitle)
+            .foregroundColor(Color("grey"))
+            .padding(.vertical)
+    }
+
+    private func habitCard(for habit: AllHabits) -> some View {
+        Button(action: {
+            navManager.push(
+                HabitDetailView(
+                    habit: habit,
+                    habitID: habit.objectID,
+                    selectedTab: $selectedTab,
+                    moc: viewModel.moc
+                )
+            )
+        }) {
+            HabitViewCard(title: habit.title ?? "Unknown", color: viewModel.color(for: habit))
+                .background(Color.clear.accessibilityIdentifier("HabitCard_\(habit.title ?? "Unknown")"))
+        }
+        .buttonStyle(PlainButtonStyle())
     }
 }
-
-//struct habitView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        habitView()
-//    }
-//}
