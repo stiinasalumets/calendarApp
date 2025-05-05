@@ -6,211 +6,105 @@ struct DailyHabitView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(entity: DailyHabits.entity(), sortDescriptors: []) private var dailyHabits: FetchedResults<DailyHabits>
-    var habitsForDay: [DailyHabits] {
-        dailyHabits.filter { $0.date?.isSameDay(as: currentDate) ?? false }
-    }
 
     let currentDate: Date
+    @StateObject private var viewModel = DailyHabitViewModel()
 
-    @State private var showReward = false
-    @State private var rewardImageURL: URL?
-
-    // Store random colors per habit row to keep them stable on rerenders
-    @State private var habitColors: [UUID: String] = [:]
-
-    // Theme controller instance
-    private let themeColorController = ThemeColorController()
-
-    var dayOfTheWeek: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE, MMMM d"
-        return dateFormatter.string(from: currentDate)
+    // FIX: Computed property for habitsForDay (just like original code)
+    private var habitsForDay: [DailyHabits] {
+        dailyHabits.filter { $0.date?.isSameDay(as: currentDate) ?? false }
     }
 
     var body: some View {
         VStack {
-            HStack {
-                Button(action: { navManager.pop() }) {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.black)
-                        .font(.title2)
-                }
-                .padding(.leading)
-
-                Spacer()
-
-                Text(dayOfTheWeek)
-                    .font(.title)
-                    .fontWeight(.bold)
-
-                Spacer()
-            }
-            .padding(.vertical)
-
-            let habitsForDay = dailyHabits.filter { $0.date?.isSameDay(as: currentDate) ?? false }
+            header
 
             if habitsForDay.isEmpty {
                 Text("No habits for today.")
                     .foregroundColor(.gray)
                     .padding()
             } else {
-                List {
-                    ForEach(habitsForDay, id: \.id) { habit in
-                        HStack {
-                            Text(habit.habit?.title ?? "Unknown Habit")
-                                .frame(maxWidth: .infinity, alignment: .leading)
-
-                            Toggle("", isOn: Binding(
-                                get: { habit.isCompleted },
-                                set: { newValue in
-                                    habit.isCompleted = newValue
-                                    saveContext()
-                                    if newValue {
-                                        handleHabitCompletion()
-                                    }
-                                }
-                            ))
-                            .labelsHidden()
-                            .tint(colorFromName(habitColor(for: habit)))
-                        }
-                        .padding(.vertical, 8)
-                    }
-                }
-                .listStyle(PlainListStyle())
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal, 16)
+                habitsList(habitsForDay: habitsForDay)
             }
 
-            if showReward, let imageURL = rewardImageURL {
-                VStack(spacing: 8) {
-                    AsyncImage(url: imageURL) { image in
-                        image
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 200)
-                            .cornerRadius(12)
-                    } placeholder: {
-                        ProgressView()
-                    }
-
-                    Text("Good job on completing a habit!")
-                        .font(.headline)
-                        .foregroundColor(.green)
-                }
-                .padding()
-                .transition(.opacity)
+            if viewModel.showReward, let imageURL = viewModel.rewardImageURL {
+                rewardView(imageURL: imageURL)
             }
         }
         .padding(.top)
-        .animation(.easeInOut, value: showReward)
+        .animation(.easeInOut, value: viewModel.showReward)
         .onAppear {
-            assignColors(to: habitsForDay)
+            viewModel.assignColors(to: habitsForDay)
+            viewModel.setContext(viewContext)
         }
     }
 
-    private func assignColors(to habits: [DailyHabits]) {
-        var previousColor = ""
-        var updatedColors: [UUID: String] = [:]
 
-        for habit in habits {
-            guard let id = habit.id else { continue }
-
-            let color = themeColorController.randomColorInList(prevColor: previousColor)
-            updatedColors[id] = color
-            previousColor = color
-        }
-
-        habitColors = updatedColors
-    }
-
-    private func habitColor(for habit: DailyHabits) -> String {
-        if let id = habit.id, let color = habitColors[id] {
-            return color
-        } else {
-            return "blue" 
-        }
-    }
-
-    private func colorFromName(_ name: String) -> Color {
-        return Color(name)
-    }
-
-    private func saveContext() {
-        do {
-            try viewContext.save()
-        } catch {
-            print("Failed to save habit completion: \(error)")
-        }
-    }
-
-    private func handleHabitCompletion() {
-        fetchRewardImage()
-    }
-
-    private func fetchRewardImage() {
-        let settingsRequest: NSFetchRequest<Settings> = Settings.fetchRequest()
-        settingsRequest.fetchLimit = 1
-
-        guard let settings = try? viewContext.fetch(settingsRequest).first else {
-            print("Settings not found")
-            return
-        }
-
-        let isDogPerson = settings.dogPerson
-        let isCatPerson = settings.catPerson
-
-        let fetchCat = (isCatPerson && !isDogPerson) ||
-                       (isCatPerson && isDogPerson && Bool.random())
-
-        if fetchCat {
-            fetchCatImage()
-        } else {
-            fetchDogImage()
-        }
-    }
-
-    private func fetchCatImage() {
-        guard let url = URL(string: "https://api.thecatapi.com/v1/images/search") else { return }
-
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            if let data = data,
-               let json = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]],
-               let first = json.first,
-               let urlString = first["url"] as? String,
-               let imageURL = URL(string: urlString) {
-                DispatchQueue.main.async {
-                    self.rewardImageURL = imageURL
-                    self.showReward = true
-
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
-                        self.showReward = false
-                    }
-                }
-            } else if let error = error {
-                print("Error fetching cat image: \(error)")
+    private var header: some View {
+        HStack {
+            Button(action: { navManager.pop() }) {
+                Image(systemName: "chevron.left")
+                    .foregroundColor(.black)
+                    .font(.title2)
             }
-        }.resume()
+            .padding(.leading)
+
+            Spacer()
+
+            Text(viewModel.dayOfTheWeek(from: currentDate))
+                .font(.title)
+                .fontWeight(.bold)
+
+            Spacer()
+        }
+        .padding(.vertical)
     }
 
-    private func fetchDogImage() {
-        guard let url = URL(string: "https://dog.ceo/api/breeds/image/random") else { return }
+    private func habitsList(habitsForDay: [DailyHabits]) -> some View {
+        List {
+            ForEach(habitsForDay, id: \.id) { habit in
+                HStack {
+                    Text(habit.habit?.title ?? "Unknown Habit")
+                        .frame(maxWidth: .infinity, alignment: .leading)
 
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            if let data = data,
-               let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-               let imageURLString = json["message"] as? String,
-               let imageURL = URL(string: imageURLString) {
-                DispatchQueue.main.async {
-                    self.rewardImageURL = imageURL
-                    self.showReward = true
-
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
-                        self.showReward = false
-                    }
+                    Toggle("", isOn: Binding(
+                        get: { habit.isCompleted },
+                        set: { newValue in
+                            habit.isCompleted = newValue
+                            viewModel.saveContext()
+                            if newValue {
+                                viewModel.handleHabitCompletion()
+                            }
+                        }
+                    ))
+                    .labelsHidden()
+                    .tint(viewModel.color(for: habit))
                 }
-            } else if let error = error {
-                print("Error fetching dog image: \(error)")
+                .padding(.vertical, 8)
             }
-        }.resume()
+        }
+        .listStyle(PlainListStyle())
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 16)
+    }
+
+    private func rewardView(imageURL: URL) -> some View {
+        VStack(spacing: 8) {
+            AsyncImage(url: imageURL) { image in
+                image
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 200)
+                    .cornerRadius(12)
+            } placeholder: {
+                ProgressView()
+            }
+
+            Text("Good job on completing a habit!")
+                .font(.headline)
+                .foregroundColor(.green)
+        }
+        .padding()
+        .transition(.opacity)
     }
 }

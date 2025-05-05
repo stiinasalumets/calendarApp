@@ -3,106 +3,106 @@ import CoreData
 
 struct HabitDetailView: View {
     @EnvironmentObject var navManager: NavigationStackManager
-    
-    var habit: AllHabits
-    var habitID: NSManagedObjectID
-    var moc: NSManagedObjectContext
+    @ObservedObject private var viewModel = HabitDetailViewModel()
+
+    let habit: AllHabits
+    let habitID: NSManagedObjectID
+    let moc: NSManagedObjectContext
     @Binding var selectedTab: BottomBarTabs
-    @State private var selectedDays: Set<String> = []
-    @State private var sortedDays: [String] = []
-    
+
     init(habit: AllHabits, habitID: NSManagedObjectID, selectedTab: Binding<BottomBarTabs>, moc: NSManagedObjectContext) {
         self.habit = habit
         self.habitID = habitID
         self.moc = moc
         self._selectedTab = selectedTab
     }
-    
+
     var body: some View {
         VStack {
-            VStack{
-                HStack {
-                    Button(action: { navManager.pop() }) {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(Color("grey"))
-                            .font(.title2)
-                    }
-                    .padding([.leading, .top])
-                    
-                    Spacer()
-                }
-                .overlay(
-                    Text(habit.title ?? "Unknown")
-                        .font(.largeTitle)
-                        .foregroundColor(Color("grey"))
-                        .padding(.top),
-                    alignment: .center
-                )
-                .padding(.vertical)
-            }
-            
-            VStack {
-                List(Array(sortedDays), id: \.self) { day in
-                    Text(day)
-                }
-            }
-            
-            HStack {
-                let title = habit.title ?? ""
-                
-                Button(action: {
-                    navManager.push(deleteView(selectedTab: $selectedTab, moc: moc, habitID: habitID, title: title))
-                }) {
-                    HStack {
-                        Text("Delete")
-                            .foregroundColor(Color("grey"))
-                            .font(.body)
-                        Image(systemName: "trash")
-                            .foregroundColor(Color("grey"))
-                            .font(.body)
-                    }
-                }
-                
-                Spacer()
-                
-                Button(action: {
-                    navManager.push(
-                        EditView(selectedTab: $selectedTab, moc: moc, title: title, selectedDays: selectedDays, habitID: habitID
-                                )
-                    )
-                }) {
-                    HStack {
-                        Text("Edit")
-                            .foregroundColor(Color("grey"))
-                            .font(.body)
-                        Image(systemName: "pencil")
-                            .foregroundColor(Color("grey"))
-                            .font(.body)
-                    }
-                }
-            }.padding()
-        }.onAppear {
-            createWeekdaysArray(intervalString: habit.interval ?? "")
+            headerView
+            daysListView
+            actionButtons
+        }
+        .onAppear {
+            viewModel.configureDays(from: habit.interval)
         }
     }
-    
-    func createWeekdaysArray(intervalString: String) {
-        let intervalDaysArray = intervalString
-            .components(separatedBy: ",")
-            .map { $0.trimmingCharacters(in: .whitespaces) }
-        
-        let weekDaysOrder = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-        
-        let sorted = intervalDaysArray.sorted {
-            guard let firstIndex = weekDaysOrder.firstIndex(of: $0),
-                  let secondIndex = weekDaysOrder.firstIndex(of: $1) else {
-                return false
+
+    // MARK: - Subviews
+
+    private var headerView: some View {
+        VStack {
+            HStack {
+                backButton
+                Spacer()
             }
-            return firstIndex < secondIndex
+            .overlay(
+                Text(habit.title ?? "Unknown")
+                    .font(.largeTitle)
+                    .foregroundColor(Color("grey"))
+                    .padding(.top),
+                alignment: .center
+            )
+            .padding(.vertical)
         }
-        
-        selectedDays = Set(sorted)
-        sortedDays = sorted
+    }
+
+    private var backButton: some View {
+        Button(action: { navManager.pop() }) {
+            Image(systemName: "chevron.left")
+                .foregroundColor(Color("grey"))
+                .font(.title2)
+        }
+        .padding([.leading, .top])
+    }
+
+    private var daysListView: some View {
+        List(viewModel.sortedDays, id: \.self) { day in
+            Text(day)
+        }
+    }
+
+    private var actionButtons: some View {
+        HStack {
+            deleteButton
+            Spacer()
+            editButton
+        }
+        .padding()
+    }
+
+    private var deleteButton: some View {
+        Button(action: {
+            navManager.push(deleteView(selectedTab: $selectedTab, moc: moc, habitID: habitID, title: habit.title ?? ""))
+        }) {
+            labelWithIcon(text: "Delete", systemImage: "trash")
+        }
+    }
+
+    private var editButton: some View {
+        Button(action: {
+            navManager.push(
+                EditView(
+                    selectedTab: $selectedTab,
+                    moc: moc,
+                    title: habit.title ?? "",
+                    selectedDays: viewModel.selectedDays,
+                    habitID: habitID
+                )
+            )
+        }) {
+            labelWithIcon(text: "Edit", systemImage: "pencil")
+        }
+    }
+
+    private func labelWithIcon(text: String, systemImage: String) -> some View {
+        HStack {
+            Text(text)
+                .foregroundColor(Color("grey"))
+                .font(.body)
+            Image(systemName: systemImage)
+                .foregroundColor(Color("grey"))
+                .font(.body)
+        }
     }
 }
-

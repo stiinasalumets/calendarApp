@@ -3,128 +3,92 @@ import CoreData
 
 struct CalendarView: View {
     @Environment(\.managedObjectContext) private var moc
-    @FetchRequest(entity: DailyHabits.entity(), sortDescriptors: []) private var dailyHabits: FetchedResults<DailyHabits>
-    
     @EnvironmentObject var navManager: NavigationStackManager
-    
-    @State private var currentWeekStart: Date = Calendar.current.date(byAdding: .day, value: -6, to: Date()) ?? Date()
-    
-    var weekDayColorPairs: [(Date, String)] {
-        var results: [(Date, String)] = []
-        var prevColor = ""
-        
-        for offset in 0..<7 {
-            let day = Calendar.current.date(byAdding: .day, value: offset, to: currentWeekStart)!
-            let newColor = ThemeColorController().randomColorInList(prevColor: prevColor)
-            results.append((day, newColor))
-            prevColor = newColor
-        }
-        return results
-    }
+
+    @FetchRequest(entity: DailyHabits.entity(), sortDescriptors: [])
+    private var dailyHabits: FetchedResults<DailyHabits>
+
+    @StateObject private var viewModel = ViewModel()
 
     var body: some View {
         VStack {
-            HStack {
-                let localDate = Date()
-                let localWeekStart = Calendar.current.date(byAdding: .day, value: -6, to: localDate) ?? localDate
-
-                Button(action: { currentWeekStart = localWeekStart }) {
-                    Text("Present")
-                        .font(.headline)
-                        .padding(8)
-                        .background(Color.white)
-                        .cornerRadius(8)
-                }
-
-                Button(action: {
-                    currentWeekStart = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: currentWeekStart) ?? currentWeekStart
-                }) {
-                    Image(systemName: "chevron.left")
-                }
-
-                Text(currentWeekStart.formatAsWeekRange())
-                    .font(.headline)
-
-                let isAtPresentOrFuture = currentWeekStart >= (Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date())
-
-                if !isAtPresentOrFuture {
-                    Button(action: {
-                        currentWeekStart = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: currentWeekStart) ?? currentWeekStart
-                    }) {
-                        Image(systemName: "chevron.right")
-                    }
-                }
-            }
-            .padding()
+            weekNavigationBar
 
             GeometryReader { geometry in
                 VStack(spacing: 0) {
                     Spacer(minLength: 0)
 
-                    ForEach(weekDayColorPairs, id: \.0) { day, color in
-                        let habitsForDay = dailyHabits.filter { $0.date?.isSameDay(as: day) ?? false }
-                        let totalHabits = habitsForDay.count
-                        let completedHabits = habitsForDay.filter { $0.isCompleted }.count
-
-                        Button(action: {
-                            navManager.push(DailyHabitView(currentDate: day))
-                        }) {
-                            HStack {
-                                Text("\(day.formatAsDayOfWeek()) \(day.formatAsDayNumber())")
-                                    .font(.headline)
-                                    .foregroundColor(Color("grey"))
-                                    .frame(width: geometry.size.width * 0.25,
-                                           alignment: .leading)
-
-                                ProgressBarView(moc: moc, totalHabits: totalHabits, completedHabits: completedHabits, color: color)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                            }
-                            .frame(height: geometry.size.height / 7)
-                        }
+                    ForEach(viewModel.weekDayColorPairs, id: \.date) { pair in
+                        dayButton(pair: pair, geometry: geometry)
                     }
 
                     Spacer(minLength: 0)
                 }
             }
-
             .ignoresSafeArea(edges: [.top, .bottom])
             .padding()
+        }
+        .onAppear {
+            viewModel.initializeWeek()
+        }
+    }
+
+    // MARK: - Week Navigation Bar
+    private var weekNavigationBar: some View {
+        HStack {
+            Button(action: viewModel.goToPresent) {
+                Text("Present")
+                    .font(.headline)
+                    .padding(8)
+                    .background(Color.white)
+                    .cornerRadius(8)
+            }
+
+            Button(action: viewModel.goToPreviousWeek) {
+                Image(systemName: "chevron.left")
+            }
+
+            Text(viewModel.currentWeekStart.formatAsWeekRange())
+                .font(.headline)
+
+            if !viewModel.isShowingCurrentWeek {
+                Button(action: viewModel.goToNextWeek) {
+                    Image(systemName: "chevron.right")
+                }
+            }
+        }
+        .padding()
+    }
+
+    // MARK: - Day Button
+    private func dayButton(pair: ViewModel.DayColorPair, geometry: GeometryProxy) -> some View {
+        let habits = viewModel.habits(for: pair.date, in: dailyHabits)
+        let totalHabits = habits.count
+        let completedHabits = habits.filter { $0.isCompleted }.count
+
+        return Button {
+            navManager.push(DailyHabitView(currentDate: pair.date))
+        } label: {
+            HStack {
+                Text("\(pair.date.formatAsDayOfWeek()) \(pair.date.formatAsDayNumber())")
+                    .font(.headline)
+                    .foregroundColor(Color("grey"))
+                    .frame(width: geometry.size.width * 0.25, alignment: .leading)
+
+                ProgressBarView(totalHabits: totalHabits,
+                                completedHabits: completedHabits,
+                                color: pair.color)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .frame(height: geometry.size.height / 7)
         }
     }
 }
 
-extension Date {
-    func startOfWeek() -> Date {
-        Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))!
-    }
-
-    func formatAsWeekRange() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d"
-        let start = formatter.string(from: self)
-        let end = formatter.string(from: Calendar.current.date(byAdding: .day, value: 6, to: self)!)
-        return "\(start) - \(end)"
-    }
-
-    func formatAsDayOfWeek() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EEE"
-        return formatter.string(from: self)
-    }
-
-    func formatAsDayNumber() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "d"
-        return formatter.string(from: self)
-    }
-
-    func isSameDay(as other: Date) -> Bool {
-        Calendar.current.isDate(self, inSameDayAs: other)
-    }
-}
-
+// MARK: - Preview
 struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
         CalendarView()
+            .environmentObject(NavigationStackManager())
     }
 }

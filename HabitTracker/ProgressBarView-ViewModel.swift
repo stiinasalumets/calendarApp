@@ -2,13 +2,20 @@ import Foundation
 import SwiftUI
 import CoreData
 
-extension ProgressBarView {
-    class ViewModel: ObservableObject {
-        
-        private var moc: NSManagedObjectContext
-        
-        init(moc: NSManagedObjectContext) {
-            self.moc = moc
-        }
+class ProgressBarViewModel: ObservableObject {
+    @Published var totalHabits: Int = 0
+    @Published var completedHabits: Int = 0
+
+    var progressFraction: CGFloat {
+        totalHabits > 0 ? CGFloat(completedHabits) / CGFloat(totalHabits) : 0
+    }
+
+    var progressText: String {
+        "\(completedHabits)/\(totalHabits)"
+    }
+
+    func computeProgress(from habits: [DailyHabits]) {
+        totalHabits = habits.count
+        completedHabits = habits.filter { $0.isCompleted }.count
     }
 }
